@@ -1,0 +1,653 @@
+# EasyMap WordPress plugin <LANGUAGE> translation
+# Copyright (C) 2021 Joaquim Homrighausen
+# This file is distributed under the same license as the EasyMap package.
+# Joaquim Homrighausen <joho@webbplatsen.se>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-26 15:05+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: include/class_location_admin.inc.php:169
+#: include/class_location_admin.inc.php:169
+msgid "No locations"
+msgstr ""
+
+#: include/class_location_admin.inc.php:180 easymap.php:2096
+#: include/class_location_admin.inc.php:180 easymap.php:2114
+msgid "ID"
+msgstr ""
+
+#: include/class_location_admin.inc.php:181
+#: include/class_location_admin.inc.php:181
+msgid "Alias"
+msgstr ""
+
+#: include/class_location_admin.inc.php:182
+#: include/class_location_admin.inc.php:182
+msgid "Name"
+msgstr ""
+
+#: include/class_location_admin.inc.php:183 easymap.php:2164
+#: include/class_location_admin.inc.php:183 easymap.php:2182
+msgid "City"
+msgstr ""
+
+#: include/class_location_admin.inc.php:255
+#: include/class_location_admin.inc.php:255
+msgid "Add new location"
+msgstr ""
+
+#: easymap.php:339 easymap.php:882 easymap.php:339 easymap.php:900
+msgid "Address template"
+msgstr ""
+
+#: easymap.php:342 easymap.php:342
+msgid "Custom template"
+msgstr ""
+
+#: easymap.php:433 easymap.php:433
+msgid "Settings "
+msgstr ""
+
+#: easymap.php:448 easymap.php:448
+msgid ""
+"mbstring-extensions are missing, contact server administrator to enable them"
+msgstr ""
+
+#: easymap.php:457 easymap.php:457
+msgid "Please configure an API key to be used for Google Geodata services"
+msgstr ""
+
+#: easymap.php:655 easymap.php:655
+msgid "Settings"
+msgstr ""
+
+#: easymap.php:661 easymap.php:662 easymap.php:1660 easymap.php:1661
+#: easymap.php:1894 easymap.php:661 easymap.php:662 easymap.php:1678
+#: easymap.php:1679 easymap.php:1912
+msgid "Locations"
+msgstr ""
+
+#: easymap.php:667 easymap.php:1198 easymap.php:667 easymap.php:1216
+msgid "Export various data"
+msgstr ""
+
+#: easymap.php:668 easymap.php:1197 easymap.php:668 easymap.php:1215
+msgid "Export"
+msgstr ""
+
+#: easymap.php:673 easymap.php:673
+msgid "Import external data"
+msgstr ""
+
+#: easymap.php:674 easymap.php:1657 easymap.php:1681 easymap.php:1700
+#: easymap.php:1708 easymap.php:674 easymap.php:1675 easymap.php:1699
+#: easymap.php:1718 easymap.php:1726
+msgid "Import"
+msgstr ""
+
+#: easymap.php:782 easymap.php:782
+msgid "These settings allow general configuration of EasyMap"
+msgstr ""
+
+#: easymap.php:784 easymap.php:784
+msgid "Google Maps"
+msgstr ""
+
+#: easymap.php:785 easymap.php:785
+msgid "Templates"
+msgstr ""
+
+#: easymap.php:786 easymap.php:787
+msgid "About"
+msgstr ""
+
+#: easymap.php:809 easymap.php:810
+msgid "Sample address output"
+msgstr ""
+
+#: easymap.php:822 easymap.php:840
+msgid "Thank you for installing"
+msgstr ""
+
+#: easymap.php:823 easymap.php:841
+msgid ""
+"This WordPress plugin provides geolocation services for WordPress and "
+"certain types of service providers"
+msgstr ""
+
+#: easymap.php:827 easymap.php:845
+msgid "Commercial support and customizations for this plugin is available from"
+msgstr ""
+
+#: easymap.php:829 easymap.php:847
+msgid "in Stockholm, Sweden. We speak Swedish and English"
+msgstr ""
+
+#: easymap.php:831 easymap.php:849
+msgid ""
+"The plugin is written by Joaquim Homrighausen and sponsored by WebbPlatsen i "
+"Sverige AB."
+msgstr ""
+
+#: easymap.php:833 easymap.php:851
+msgid ""
+"If you find this plugin useful, the author is happy to receive a donation, "
+"good review, or just a kind word."
+msgstr ""
+
+#: easymap.php:834 easymap.php:852
+msgid ""
+"If there is something you feel to be missing from this plugin, or if you "
+"have found a problem with the code or a feature, please do not hesitate to "
+"reach out to"
+msgstr ""
+
+#: easymap.php:836 easymap.php:854
+msgid "There is more documentation available at"
+msgstr ""
+
+#: easymap.php:866 easymap.php:884
+msgid "Disable notifications"
+msgstr ""
+
+#: easymap.php:867 easymap.php:2231 easymap.php:885 easymap.php:2249
+msgid "Google Geodata API key"
+msgstr ""
+
+#: easymap.php:868 easymap.php:886
+msgid "Localization"
+msgstr ""
+
+#: easymap.php:869 easymap.php:887
+msgid "Region"
+msgstr ""
+
+#: easymap.php:870 easymap.php:888
+msgid "Country"
+msgstr ""
+
+#: easymap.php:871 easymap.php:889
+msgid "Starting position"
+msgstr ""
+
+#: easymap.php:873 easymap.php:891
+msgid "Initial zoom"
+msgstr ""
+
+#: easymap.php:874 easymap.php:892
+msgid "Map features"
+msgstr ""
+
+#: easymap.php:878 easymap.php:896
+msgid "Bouncing markers"
+msgstr ""
+
+#: easymap.php:879 easymap.php:897
+msgid "Hover color switch"
+msgstr ""
+
+#: easymap.php:880 easymap.php:898
+msgid "Remove settings"
+msgstr ""
+
+#: easymap.php:883 easymap.php:901
+msgid "Custom template data"
+msgstr ""
+
+#: easymap.php:1040 easymap.php:1058
+msgid "Disable notifications about missing Google API key"
+msgstr ""
+
+#: easymap.php:1046 easymap.php:1064
+msgid "The Google Geodata API key as provided by Google"
+msgstr ""
+
+#: easymap.php:1051 easymap.php:1069
+msgid "Language code for Google Maps"
+msgstr ""
+
+#: easymap.php:1058 easymap.php:1076
+msgid "Region code for Google Maps"
+msgstr ""
+
+#: easymap.php:1065 easymap.php:1083
+msgid "Country (name) for lookups in Locations"
+msgstr ""
+
+#: easymap.php:1070 easymap.php:1088
+msgid "lat"
+msgstr ""
+
+#: easymap.php:1074 easymap.php:1092
+msgid "long"
+msgstr ""
+
+#: easymap.php:1077 easymap.php:1095
+msgid "Starting position for Google Maps, defaults to auto position"
+msgstr ""
+
+#: easymap.php:1083 easymap.php:1101
+msgid "Starting map zoom level 1-18, leave empty for auto zoom"
+msgstr ""
+
+#: easymap.php:1090 easymap.php:1108
+msgid "POI"
+msgstr ""
+
+#: easymap.php:1094 easymap.php:1112
+msgid "Transit"
+msgstr ""
+
+#: easymap.php:1098 easymap.php:1116
+msgid "Landscape"
+msgstr ""
+
+#: easymap.php:1102 easymap.php:1120
+msgid "Type selector"
+msgstr ""
+
+#: easymap.php:1105 easymap.php:1123
+msgid "Configure various Google Maps features"
+msgstr ""
+
+#: easymap.php:1112 easymap.php:1130
+msgid "Bouncing effect when mouse pointer is over marker"
+msgstr ""
+
+#: easymap.php:1119 easymap.php:1137
+msgid "Switch color when mouse pointer is over marker"
+msgstr ""
+
+#: easymap.php:1126 easymap.php:1144
+msgid "Remove all plugin settings and data when plugin is uninstalled"
+msgstr ""
+
+#: easymap.php:1200 easymap.php:1218
+msgid "Locations, JSON"
+msgstr ""
+
+#: easymap.php:1201 easymap.php:1219
+msgid "Locations, CSV"
+msgstr ""
+
+#: easymap.php:1202 easymap.php:1220
+msgid "Configuration, JSON"
+msgstr ""
+
+#: easymap.php:1208 easymap.php:1222 easymap.php:1226 easymap.php:1240
+msgid "Only locations with a non-empty \"name\" will be exported"
+msgstr ""
+
+#: easymap.php:1209 easymap.php:1285 easymap.php:1227 easymap.php:1303
+msgid "Copy and paste this Base64 data into another EasyMap installation"
+msgstr ""
+
+#: easymap.php:1217 easymap.php:1271 easymap.php:1235 easymap.php:1289
+msgid "There are no locations to export"
+msgstr ""
+
+#: easymap.php:1223 easymap.php:1241
+msgid "Copy and paste this CSV data into another application"
+msgstr ""
+
+#: easymap.php:1224 easymap.php:1242
+msgid ""
+"You can also save it to a .csv file and open it in your spreadsheet "
+"application"
+msgstr ""
+
+#: easymap.php:1282 easymap.php:1300
+msgid "Unable to fetch plugin configuration from the WordPress database"
+msgstr ""
+
+#: easymap.php:1287 easymap.php:1305
+msgid "Please note that locations are not included in this export"
+msgstr ""
+
+#: easymap.php:1345 easymap.php:1563 easymap.php:1363 easymap.php:1581
+msgid "Please enter a valid Base64 encoded string"
+msgstr ""
+
+#: easymap.php:1354 easymap.php:1372
+msgid "The specified import data does not seem to contain any locations"
+msgstr ""
+
+#: easymap.php:1356 easymap.php:1374
+msgid "The specified import data contains more than 200 locations"
+msgstr ""
+
+#: easymap.php:1366 easymap.php:1384
+msgid "No locations with \"Name\" found in import data"
+msgstr ""
+
+#: easymap.php:1399 easymap.php:1506 easymap.php:1417 easymap.php:1524
+msgid "No empty location slots to use for import"
+msgstr ""
+
+#: easymap.php:1439 easymap.php:1545 easymap.php:1457 easymap.php:1563
+msgid "No more empty location slots, all locations were not imported"
+msgstr ""
+
+#: easymap.php:1481 easymap.php:1499
+msgid "Please enter valid CSV encoded data"
+msgstr ""
+
+#: easymap.php:1572 easymap.php:1586 easymap.php:1590 easymap.php:1604
+msgid ""
+"The specified import data does not seem to contain an exported configuration"
+msgstr ""
+
+#: easymap.php:1603 easymap.php:1621
+msgid "One or more unrecognized options were ignored"
+msgstr ""
+
+#: easymap.php:1630 easymap.php:1636 easymap.php:1648 easymap.php:1654
+msgid "location(s) imported"
+msgstr ""
+
+#: easymap.php:1642 easymap.php:1660
+msgid "configuration setting(s) imported"
+msgstr ""
+
+#: easymap.php:1658 easymap.php:1676
+msgid "Import data"
+msgstr ""
+
+#: easymap.php:1662 easymap.php:1680
+msgid "Configuration"
+msgstr ""
+
+#: easymap.php:1670 easymap.php:1685 easymap.php:1688 easymap.php:1703
+msgid ""
+"Only locations with a non-empty \"name\" will be imported. Identical IDs "
+"will be re-located unless \"Replace locations\" is selected."
+msgstr ""
+
+#: easymap.php:1672 easymap.php:1690
+msgid "Paste previously exported Base64 location data into this field"
+msgstr ""
+
+#: easymap.php:1675 easymap.php:1694 easymap.php:1693 easymap.php:1712
+msgid "Replace locations"
+msgstr ""
+
+#: easymap.php:1678 easymap.php:1697 easymap.php:1696 easymap.php:1715
+msgid "This will REMOVE ALL PREVIOUS locations before doing the import"
+msgstr ""
+
+#: easymap.php:1687 easymap.php:1705
+msgid "The column format must exactly match this syntax"
+msgstr ""
+
+#: easymap.php:1688 easymap.php:1706
+msgid ""
+"ID,Alias,Name,Street address,Street number,City,State,Zip,Phone,E-mail,"
+"Website,Pos LAT,Pos LONG,Active,Description"
+msgstr ""
+
+#: easymap.php:1691 easymap.php:1709
+msgid "Paste previously exported CSV location data into this field"
+msgstr ""
+
+#: easymap.php:1704 easymap.php:1722
+msgid "This will replace plugin configuration data except for locations"
+msgstr ""
+
+#: easymap.php:1706 easymap.php:1724
+msgid "Paste previously exported Base64 configuration data into this field"
+msgstr ""
+
+#: easymap.php:1725 easymap.php:1743
+msgid "is a required field"
+msgstr ""
+
+#: easymap.php:1762 easymap.php:1780
+msgid "Invalid location ID, must be 1-200"
+msgstr ""
+
+#: easymap.php:1795 easymap.php:1813
+msgid "Location name must be two characters or more"
+msgstr ""
+
+#: easymap.php:1803 easymap.php:1821
+msgid ""
+"Location color must be # followed by three or six hexadecimal digits (0-9a-f)"
+msgstr ""
+
+#: easymap.php:1812 easymap.php:1830
+msgid "Location alias must not begin with a number (0-9)"
+msgstr ""
+
+#: easymap.php:1825 easymap.php:1843
+msgid "Location ID must be 1-200"
+msgstr ""
+
+#: easymap.php:1864 easymap.php:1882
+msgid "Location saved"
+msgstr ""
+
+#: easymap.php:1871 easymap.php:1902 easymap.php:1889 easymap.php:1920
+#: easymap.php:1931
+msgid "Unable to process location form data"
+msgstr ""
+
+#: easymap.php:1913
+msgid "Unable to process locationform data"
+msgstr ""
+
+#: easymap.php:1927 easymap.php:1945
+msgid "Location deleted"
+msgstr ""
+
+#: easymap.php:1955 easymap.php:1973
+msgid "Search"
+msgstr ""
+
+#: easymap.php:1976 easymap.php:1994
+msgid "Location"
+msgstr ""
+
+#: easymap.php:1988 easymap.php:2006
+msgid "Unable to fetch location"
+msgstr ""
+
+#: easymap.php:1989 easymap.php:2007
+msgid "Invalid location ID"
+msgstr ""
+
+#: easymap.php:1992 easymap.php:2114 easymap.php:2010 easymap.php:2132
+msgid "Click the back button in your browser and try again"
+msgstr ""
+
+#: easymap.php:1994 easymap.php:2116 easymap.php:2012 easymap.php:2134
+msgid "or"
+msgstr ""
+
+#: easymap.php:1996 easymap.php:2014
+msgid "go to list of locations"
+msgstr ""
+
+#: easymap.php:2071 easymap.php:2089
+msgid "new location"
+msgstr ""
+
+#: easymap.php:2073 easymap.php:2091
+msgid "location ID"
+msgstr ""
+
+#: easymap.php:2076 easymap.php:2094
+msgid "Location details"
+msgstr ""
+
+#: easymap.php:2081 easymap.php:2099
+msgid "Location name"
+msgstr ""
+
+#: easymap.php:2095 easymap.php:2113
+msgid "Location ID"
+msgstr ""
+
+#: easymap.php:2111 easymap.php:2129
+msgid "No available location IDs"
+msgstr ""
+
+#: easymap.php:2118 easymap.php:2136
+msgid "go to list of location"
+msgstr ""
+
+#: easymap.php:2140 easymap.php:2158
+msgid "Street address"
+msgstr ""
+
+#: easymap.php:2144 easymap.php:2162
+msgid "Street number"
+msgstr ""
+
+#: easymap.php:2148 easymap.php:2166
+msgid "Active"
+msgstr ""
+
+#: easymap.php:2151 easymap.php:2169
+msgid "Yes"
+msgstr ""
+
+#: easymap.php:2153 easymap.php:2171
+msgid "No"
+msgstr ""
+
+#: easymap.php:2160 easymap.php:2178
+msgid "Postal code"
+msgstr ""
+
+#: easymap.php:2168 easymap.php:2186
+msgid "State"
+msgstr ""
+
+#: easymap.php:2175 easymap.php:2193
+msgid "E-mail"
+msgstr ""
+
+#: easymap.php:2179 easymap.php:2197
+msgid "Phone"
+msgstr ""
+
+#: easymap.php:2183 easymap.php:2201
+msgid "Website"
+msgstr ""
+
+#: easymap.php:2190 easymap.php:2208
+msgid "Latitude"
+msgstr ""
+
+#: easymap.php:2194 easymap.php:2212
+msgid "Longitude"
+msgstr ""
+
+#: easymap.php:2198 easymap.php:2216
+msgid "Location alias"
+msgstr ""
+
+#: easymap.php:2205 easymap.php:2223
+msgid "Description (HTML allowed)"
+msgstr ""
+
+#: easymap.php:2213 easymap.php:2231
+msgid "Save"
+msgstr ""
+
+#: easymap.php:2215 easymap.php:2233
+msgid "Cancel"
+msgstr ""
+
+#: easymap.php:2218 easymap.php:2236
+msgid "Reset form data"
+msgstr ""
+
+#: easymap.php:2227 easymap.php:2245
+msgid "Google Maps lookup"
+msgstr ""
+
+#: easymap.php:2229 easymap.php:2247
+msgid "Please configure your"
+msgstr ""
+
+#: easymap.php:2232 easymap.php:2250
+msgid "to perform lookups"
+msgstr ""
+
+#: easymap.php:2234 easymap.php:2252
+msgid ""
+"Please specify, as a minimum, the location street address to perform a "
+"Google Maps lookup"
+msgstr ""
+
+#: easymap.php:2267 easymap.php:2280 easymap.php:2322 easymap.php:2285
+#: easymap.php:2298 easymap.php:2340
+msgid "Unable to retrieve information from Google Maps"
+msgstr ""
+
+#: easymap.php:2286 easymap.php:2304
+msgid "Address"
+msgstr ""
+
+#: easymap.php:2291 easymap.php:2309
+msgid "Geolocation"
+msgstr ""
+
+#: easymap.php:2294 easymap.php:2312
+msgid "Lat"
+msgstr ""
+
+#: easymap.php:2295 easymap.php:2313
+msgid "Long"
+msgstr ""
+
+#: easymap.php:2304 easymap.php:2322
+msgid "Copy"
+msgstr ""
+
+#: easymap.php:2310 easymap.php:2328
+msgid "No information"
+msgstr ""
+
+#: easymap.php:786
+msgid "shortcode"
+msgstr ""
+
+#: easymap.php:824
+msgid ""
+"To use the plugin, you create a page or a post in WordPress and add the "
+"plugin shortcode"
+msgstr ""
+
+#: easymap.php:825
+msgid ""
+"The shortcode will take its deftault values from the plugin configuration"
+msgstr ""
+
+#: easymap.php:826
+msgid "The shortcode can be used once on any given page load"
+msgstr ""
+
+#: easymap.php:828
+msgid "The simplest usage form is"
+msgstr ""
+
+#: easymap.php:830
+msgid "You can also use parameters to override the default behavior"
+msgstr ""
+
+#: easymap.php:832
+msgid "The parameters available are"
+msgstr ""

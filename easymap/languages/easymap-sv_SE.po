@@ -1,0 +1,664 @@
+# EasyMap WordPress plugin SWEDISH translation
+# Copyright (C) 2021 Joaquim Homrighausen
+# This file is distributed under the same license as the EasyMap package.
+# Joaquim Homrighausen <joho@webbplatsen.se>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: easymap 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-26 11:34+0200\n"
+"PO-Revision-Date: 2021-07-26 15:05+0200\n"
+"Last-Translator: Joaquim Homrighausen <joho@webbplatsen.se>\n"
+"Language-Team: SWEDISH <support@webbplatsen.se>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: include/class_location_admin.inc.php:169
+msgid "No locations"
+msgstr "Inga platser"
+
+#: include/class_location_admin.inc.php:180 easymap.php:2096
+msgid "ID"
+msgstr "ID"
+
+#: include/class_location_admin.inc.php:181
+msgid "Alias"
+msgstr "Alias"
+
+#: include/class_location_admin.inc.php:182
+msgid "Name"
+msgstr "Namn"
+
+#: include/class_location_admin.inc.php:183 easymap.php:2164
+msgid "City"
+msgstr "Ort"
+
+#: include/class_location_admin.inc.php:255
+msgid "Add new location"
+msgstr "Lägg till ny plats"
+
+#: easymap.php:339 easymap.php:882
+msgid "Address template"
+msgstr "Adressmall"
+
+#: easymap.php:342
+msgid "Custom template"
+msgstr "Anpassad mall"
+
+#: easymap.php:433
+msgid "Settings "
+msgstr "Inställningar "
+
+#: easymap.php:448
+msgid ""
+"mbstring-extensions are missing, contact server administrator to enable them"
+msgstr ""
+"mbstring-tillägg saknas, kontakta serveradministratörern för att aktivera dessa"
+
+#: easymap.php:457
+msgid "Please configure an API key to be used for Google Geodata services"
+msgstr "Konfigurera en API-nyckel som kan användas med Google Geodata-tjänster"
+
+#: easymap.php:655
+msgid "Settings"
+msgstr "Inställningar"
+
+#: easymap.php:661 easymap.php:662 easymap.php:1660 easymap.php:1661
+#: easymap.php:1894
+msgid "Locations"
+msgstr "Platser"
+
+#: easymap.php:667 easymap.php:1198
+msgid "Export various data"
+msgstr "Exportera data"
+
+#: easymap.php:668 easymap.php:1197
+msgid "Export"
+msgstr "Export"
+
+#: easymap.php:673
+msgid "Import external data"
+msgstr "Importera extern data"
+
+#: easymap.php:674 easymap.php:1657 easymap.php:1681 easymap.php:1700
+#: easymap.php:1708
+msgid "Import"
+msgstr "Import"
+
+#: easymap.php:782
+msgid "These settings allow general configuration of EasyMap"
+msgstr "Generella inställningar för EasyMap"
+
+#: easymap.php:784
+msgid "Google Maps"
+msgstr "Google Maps"
+
+#: easymap.php:785
+msgid "Templates"
+msgstr "Mallar"
+
+#: easymap.php:786
+msgid "About"
+msgstr "Om"
+
+#: easymap.php:809
+msgid "Sample address output"
+msgstr "Exempeladress"
+
+#: easymap.php:822
+msgid "Thank you for installing"
+msgstr "Tack för att du installerat"
+
+#: easymap.php:823
+msgid ""
+"This WordPress plugin provides geolocation services for WordPress and "
+"certain types of service providers"
+msgstr ""
+"Detta WordPress-tillägg tillhandahåller lokationstjänster för WordPress "
+"och vissa typer av tjänsteleverantörer"
+
+#: easymap.php:827
+msgid "Commercial support and customizations for this plugin is available from"
+msgstr "Kommersiell support och anpassningar av detta tillägg tillhandahålls av"
+
+#: easymap.php:829
+msgid "in Stockholm, Sweden. We speak Swedish and English"
+msgstr "i Stockholm. Vi pratar svenska och engelska"
+
+#: easymap.php:831
+msgid ""
+"The plugin is written by Joaquim Homrighausen and sponsored by WebbPlatsen i "
+"Sverige AB."
+msgstr ""
+"Detta tillägg är utvecklat av Joaquim Homrighausen och sponsrat av "
+"WebbPlatsen i Sverige AB."
+
+#: easymap.php:833
+msgid ""
+"If you find this plugin useful, the author is happy to receive a donation, "
+"good review, or just a kind word."
+msgstr ""
+"Om du tycker detta tillägg är användbart så uppskattar utvecklaren en "
+"donation, bra omdöme och/eller positiv kommentar."
+
+#: easymap.php:834
+msgid ""
+"If there is something you feel to be missing from this plugin, or if you "
+"have found a problem with the code or a feature, please do not hesitate to "
+"reach out to"
+msgstr ""
+"Om du anser att något saknas i detta tillägg eller om du har hittat ett fel "
+"i koden eller en funktion, tveka inte att höra av dig till"
+
+#: easymap.php:836
+msgid "There is more documentation available at"
+msgstr "Det finns mer dokumentation på"
+
+#: easymap.php:866
+msgid "Disable notifications"
+msgstr "Avaktivera notifieringar"
+
+#: easymap.php:867 easymap.php:2231
+msgid "Google Geodata API key"
+msgstr "Google Geodata API-nyckel"
+
+#: easymap.php:868
+msgid "Localization"
+msgstr "Lokalisering"
+
+#: easymap.php:869
+msgid "Region"
+msgstr "Region"
+
+#: easymap.php:870
+msgid "Country"
+msgstr "Land"
+
+#: easymap.php:871
+msgid "Starting position"
+msgstr "Startposition"
+
+#: easymap.php:873
+msgid "Initial zoom"
+msgstr "Zoom-nivå"
+
+#: easymap.php:874
+msgid "Map features"
+msgstr "Kartegenskaper"
+
+#: easymap.php:878
+msgid "Bouncing markers"
+msgstr "Studsande nålar"
+
+#: easymap.php:879
+msgid "Hover color switch"
+msgstr "Byt färg vid hovring"
+
+#: easymap.php:880
+msgid "Remove settings"
+msgstr "Radera inställningar"
+
+#: easymap.php:883
+msgid "Custom template data"
+msgstr "Anpassad malldata"
+
+#: easymap.php:1040
+msgid "Disable notifications about missing Google API key"
+msgstr "Avaktivera notifieringar vid saknad API-nyckel för Google"
+
+#: easymap.php:1046
+msgid "The Google Geodata API key as provided by Google"
+msgstr "Google Geodata API-nyckel från Google"
+
+#: easymap.php:1051
+msgid "Language code for Google Maps"
+msgstr "Språkkod för Google Maps"
+
+#: easymap.php:1058
+msgid "Region code for Google Maps"
+msgstr "Regionkod för Google Maps"
+
+#: easymap.php:1065
+msgid "Country (name) for lookups in Locations"
+msgstr "Land (namn) för uppslag av Platser"
+
+#: easymap.php:1070
+msgid "lat"
+msgstr "lat"
+
+#: easymap.php:1074
+msgid "long"
+msgstr "long"
+
+#: easymap.php:1077
+msgid "Starting position for Google Maps, defaults to auto position"
+msgstr "Startposition för Google Maps, hanteras automatiskt som standard"
+
+#: easymap.php:1083
+msgid "Starting map zoom level 1-18, leave empty for auto zoom"
+msgstr "Zoomnivå när kartan laddas, 1-18. Lämna tomt för automatisk zoom"
+
+#: easymap.php:1090
+msgid "POI"
+msgstr "POI"
+
+#: easymap.php:1094
+msgid "Transit"
+msgstr "Transit"
+
+#: easymap.php:1098
+msgid "Landscape"
+msgstr "Landskap"
+
+#: easymap.php:1102
+msgid "Type selector"
+msgstr "Karttyp"
+
+#: easymap.php:1105
+msgid "Configure various Google Maps features"
+msgstr "Konfigurera diverse Google Maps-egenskaper"
+
+#: easymap.php:1112
+msgid "Bouncing effect when mouse pointer is over marker"
+msgstr "Studsa kartnålar vid hovring"
+
+#: easymap.php:1119
+msgid "Switch color when mouse pointer is over marker"
+msgstr "Byt färg på kartnål när muspekaren hovrar över den"
+
+#: easymap.php:1126
+msgid "Remove all plugin settings and data when plugin is uninstalled"
+msgstr "Ta bort alla inställningar när tillägget avinstalleras"
+
+#: easymap.php:1200
+msgid "Locations, JSON"
+msgstr "Platser, JSON"
+
+#: easymap.php:1201
+msgid "Locations, CSV"
+msgstr "Platser, CSV"
+
+#: easymap.php:1202
+msgid "Configuration, JSON"
+msgstr "Konfiguration, JSON"
+
+#: easymap.php:1208 easymap.php:1222
+msgid "Only locations with a non-empty \"name\" will be exported"
+msgstr "Enbart platser med ett icke-tomt \"namn\" exporteras"
+
+#: easymap.php:1209 easymap.php:1285
+msgid "Copy and paste this Base64 data into another EasyMap installation"
+msgstr "Kopiera och klistra in detta Base64-data på en annan EasyMap-installation"
+
+#: easymap.php:1217 easymap.php:1271
+msgid "There are no locations to export"
+msgstr "Det finns inga platser att exportera"
+
+#: easymap.php:1223
+msgid "Copy and paste this CSV data into another application"
+msgstr "Kopiera och klistra in detta CSV data i en annan applikation"
+
+#: easymap.php:1224
+msgid ""
+"You can also save it to a .csv file and open it in your spreadsheet "
+"application"
+msgstr ""
+"Du kan också spara det i en .csv-fil och öppna filen i din kalkylarks-"
+"applikation"
+
+#: easymap.php:1282
+msgid "Unable to fetch plugin configuration from the WordPress database"
+msgstr "Det gick inte att hämta konfigurationen från WordPress-databasen"
+
+#: easymap.php:1287
+msgid "Please note that locations are not included in this export"
+msgstr "Notera att platser ej är inkluderade i denna export"
+
+#: easymap.php:1345 easymap.php:1563
+msgid "Please enter a valid Base64 encoded string"
+msgstr "Ange en giltig Base64-kodad sträng"
+
+#: easymap.php:1354
+msgid "The specified import data does not seem to contain any locations"
+msgstr "Angivet import-data verkar inte innehålla några platser"
+
+#: easymap.php:1356
+msgid "The specified import data contains more than 200 locations"
+msgstr "Angivet import-data innehåller mer än 200 platser"
+
+#: easymap.php:1366
+msgid "No locations with \"Name\" found in import data"
+msgstr "Inga platser med \"Name\" påträffades i import-data"
+
+#: easymap.php:1399 easymap.php:1506
+msgid "No empty location slots to use for import"
+msgstr "Det finns inga tomma platser att använda för import"
+
+#: easymap.php:1439 easymap.php:1545
+msgid "No more empty location slots, all locations were not imported"
+msgstr "Det finns inga fler tomma platser, alla platser importerades inte"
+
+#: easymap.php:1481
+msgid "Please enter valid CSV encoded data"
+msgstr "Ange giltigt CSV-kodat data"
+
+#: easymap.php:1572 easymap.php:1586
+msgid ""
+"The specified import data does not seem to contain an exported configuration"
+msgstr ""
+"Angivet import-data verkar inte innehålla en exporterad konfiguration"
+
+#: easymap.php:1603
+msgid "One or more unrecognized options were ignored"
+msgstr "En eller fler okända fält ignorerades"
+
+#: easymap.php:1630 easymap.php:1636
+msgid "location(s) imported"
+msgstr "plats(er) importerades"
+
+#: easymap.php:1642
+msgid "configuration setting(s) imported"
+msgstr "konfigurations inställning(ar) importerades"
+
+#: easymap.php:1658
+msgid "Import data"
+msgstr "Importera data"
+
+#: easymap.php:1662
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: easymap.php:1670 easymap.php:1685
+msgid ""
+"Only locations with a non-empty \"name\" will be imported. Identical IDs "
+"will be re-located unless \"Replace locations\" is selected."
+msgstr ""
+"Enbart platser med ett icke-tomt \"namn\" importeras. Identiska IDn "
+"ersätts om inte \"Ersätt platser\" är valt."
+
+#: easymap.php:1672
+msgid "Paste previously exported Base64 location data into this field"
+msgstr "Klistra in tidigare exporterat Base64-platsdata i detta fält"
+
+#: easymap.php:1675 easymap.php:1694
+msgid "Replace locations"
+msgstr "Ersätt platser"
+
+#: easymap.php:1678 easymap.php:1697
+msgid "This will REMOVE ALL PREVIOUS locations before doing the import"
+msgstr "Detta RADERAR ALLA BEFINTLIGA platser innan import"
+
+#: easymap.php:1687
+msgid "The column format must exactly match this syntax"
+msgstr "Kolumnformatet måste matcha detta format exakt"
+
+#: easymap.php:1688
+msgid ""
+"ID,Alias,Name,Street address,Street number,City,State,Zip,Phone,E-mail,"
+"Website,Pos LAT,Pos LONG,Active,Description"
+msgstr ""
+"ID,Alias,Namn,Gatuadress,Gatunummer,Ort,Region,Postnummer,Telefon,E-post,"
+"Webbplats,Pos LAT,Pos LONG,Aktiv,Beskrivning"
+
+#: easymap.php:1691
+msgid "Paste previously exported CSV location data into this field"
+msgstr "Klistra in tidigare exporterat CSV-platsdata i detta fält"
+
+#: easymap.php:1704
+msgid "This will replace plugin configuration data except for locations"
+msgstr "Detta ersätter pluginkonfigurationen förutom platser"
+
+#: easymap.php:1706
+msgid "Paste previously exported Base64 configuration data into this field"
+msgstr "Klistra in tidigare exporterat Base64-konfigurationsdata i detta fält"
+
+#: easymap.php:1725
+msgid "is a required field"
+msgstr "är ett obligatoriskt fält"
+
+#: easymap.php:1762
+msgid "Invalid location ID, must be 1-200"
+msgstr "Ogiltigt plats-ID, måste vara 1-200"
+
+#: easymap.php:1795
+msgid "Location name must be two characters or more"
+msgstr "Platsens namn måste vara två eller fler tecken"
+
+#: easymap.php:1803
+msgid ""
+"Location color must be # followed by three or six hexadecimal digits (0-9a-f)"
+msgstr ""
+
+#: easymap.php:1812
+msgid "Location alias must not begin with a number (0-9)"
+msgstr "Platsalias kan inte börja med en siffra (0-9)"
+
+#: easymap.php:1825
+msgid "Location ID must be 1-200"
+msgstr "Plats-ID måste vara 1-200"
+
+#: easymap.php:1864
+msgid "Location saved"
+msgstr "Platsen sparad"
+
+#: easymap.php:1871 easymap.php:1902
+msgid "Unable to process location form data"
+msgstr "Det gick inte att behandla formulärdata"
+
+#: easymap.php:1913
+msgid "Unable to process locationform data"
+msgstr "Det gick inte att behandla formulärdata"
+
+#: easymap.php:1927
+msgid "Location deleted"
+msgstr "Platsen raderad"
+
+#: easymap.php:1955
+msgid "Search"
+msgstr "Sök"
+
+#: easymap.php:1976
+msgid "Location"
+msgstr "Plats"
+
+#: easymap.php:1988
+msgid "Unable to fetch location"
+msgstr "Det gick inte att hämta platsen"
+
+#: easymap.php:1989
+msgid "Invalid location ID"
+msgstr "Ogiltigt plats-ID"
+
+#: easymap.php:1992 easymap.php:2114
+msgid "Click the back button in your browser and try again"
+msgstr "Klicka på Tillbaka-knappen i din webbläsare och försök igen"
+
+#: easymap.php:1994 easymap.php:2116
+msgid "or"
+msgstr "eller"
+
+#: easymap.php:1996
+msgid "go to list of locations"
+msgstr "gå till platslistan"
+
+#: easymap.php:2071
+msgid "new location"
+msgstr "ny plats"
+
+#: easymap.php:2073
+msgid "location ID"
+msgstr "plats-ID"
+
+#: easymap.php:2076
+msgid "Location details"
+msgstr "Platsuppgifter"
+
+#: easymap.php:2081
+msgid "Location name"
+msgstr "Namn"
+
+#: easymap.php:2095
+msgid "Location ID"
+msgstr "Plats-ID"
+
+#: easymap.php:2111
+msgid "No available location IDs"
+msgstr "Inga tillgängliga plats-IDn"
+
+#: easymap.php:2118
+msgid "go to list of location"
+msgstr "gå till platslistan"
+
+#: easymap.php:2140
+msgid "Street address"
+msgstr "Gatuadress"
+
+#: easymap.php:2144
+msgid "Street number"
+msgstr "Gatunummer"
+
+#: easymap.php:2148
+msgid "Active"
+msgstr "Aktiv"
+
+#: easymap.php:2151
+msgid "Yes"
+msgstr "Ja"
+
+#: easymap.php:2153
+msgid "No"
+msgstr "Nej"
+
+#: easymap.php:2160
+msgid "Postal code"
+msgstr "Postnummer"
+
+#: easymap.php:2168
+msgid "State"
+msgstr "Region"
+
+#: easymap.php:2175
+msgid "E-mail"
+msgstr "E-post"
+
+#: easymap.php:2179
+msgid "Phone"
+msgstr "Telefon"
+
+#: easymap.php:2183
+msgid "Website"
+msgstr "Webbplats"
+
+#: easymap.php:2190
+msgid "Latitude"
+msgstr "Latitud"
+
+#: easymap.php:2194
+msgid "Longitude"
+msgstr "Longitud"
+
+#: easymap.php:2198
+msgid "Location alias"
+msgstr "Platsalias"
+
+#: easymap.php:2205
+msgid "Description (HTML allowed)"
+msgstr "Beskrivning (HTML kan användas)"
+
+#: easymap.php:2213
+msgid "Save"
+msgstr "Spara"
+
+#: easymap.php:2215
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: easymap.php:2218
+msgid "Reset form data"
+msgstr "Återställ formulär"
+
+#: easymap.php:2227
+msgid "Google Maps lookup"
+msgstr "Google Maps-uppslag"
+
+#: easymap.php:2229
+msgid "Please configure your"
+msgstr "Konfigurera din"
+
+#: easymap.php:2232
+msgid "to perform lookups"
+msgstr "för att göra uppslag"
+
+#: easymap.php:2234
+msgid ""
+"Please specify, as a minimum, the location street address to perform a "
+"Google Maps lookup"
+msgstr ""
+"Ange, som minimum, platsens gatuadress för att göra ett Google Maps-"
+"uppslag"
+
+#: easymap.php:2267 easymap.php:2280 easymap.php:2322
+msgid "Unable to retrieve information from Google Maps"
+msgstr "Det gick inte att hämta information från Google Maps"
+
+#: easymap.php:2286
+msgid "Address"
+msgstr "Adress"
+
+#: easymap.php:2291
+msgid "Geolocation"
+msgstr "Geolokation"
+
+#: easymap.php:2294
+msgid "Lat"
+msgstr "Lat"
+
+#: easymap.php:2295
+msgid "Long"
+msgstr "Long"
+
+#: easymap.php:2304
+msgid "Copy"
+msgstr "Kopiera"
+
+#: easymap.php:2310
+msgid "No information"
+msgstr "Ingen information"
+
+#: easymap.php:786
+msgid "shortcode"
+msgstr "shortcode"
+
+#: easymap.php:824
+msgid ""
+"To use the plugin, you create a page or a post in WordPress and add the "
+"plugin shortcode"
+msgstr ""
+"För att använda tillägget så skapar du en sida eller inlägg i WordPress "
+"och lägger in shortcoden för tillägget"
+
+#: easymap.php:825
+msgid ""
+"The shortcode will take its deftault values from the plugin configuration"
+msgstr ""
+"Shortcoden tar standardvärden för parametrar från tilläggets konfiguration"
+
+#: easymap.php:826
+msgid "The shortcode can be used once on any given page load"
+msgstr "Shortcoden kan användas en (1) gång på en sida, inklusive widgets"
+
+#: easymap.php:828
+msgid "The simplest usage form is"
+msgstr "Den enklaste formen av användning är"
+
+#: easymap.php:830
+msgid "You can also use parameters to override the default behavior"
+msgstr "Du kan också komplettera med parametrar för att ändra resultatet"
+
+#: easymap.php:832
+msgid "The parameters available are"
+msgstr "De tillgängliga parametrarna är"

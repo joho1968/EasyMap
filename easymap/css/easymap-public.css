@@ -1,0 +1,103 @@
+/**
+ * EasyMap Public CSS
+ *
+ * If you want to customize this CSS, put your customizations in the file
+ * "easymap-public-custom.css" in the same directory as this file. There is
+ * a sample file provided (easymap_public_custom.css), that you can rename
+ * and use.
+ *
+ * !!! THIS FILE WILL BE OVERWRITTEN WHEN UPDATING THE PLUGIN !!!
+ */
+#easymap-map {
+    border:2px solid #aaaaaa !important;
+    display:block;
+    width:auto;
+    max-width:1200px;
+    height:400px;
+    margin:auto;
+}
+.easymap-map {
+}
+#easymap-info-window {
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+    align-items:flex-start;
+    background-color:white;
+    min-width:256px;
+}
+.easymap-info-title {
+    width:100%;
+    font-size:1.3em;
+    font-weight:bold;
+    margin-bottom:5px;
+    border-bottom:2px solid #a0a0a0;
+}
+.easymap-info-contact {
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.easymap-info-website {
+    font-size:1em;
+    padding:2px;
+    margin-right:2px;
+}
+.easymap-info-email {
+    font-size:1em;
+    padding:2px;
+    margin-right:2px;
+}
+.easymap-info-phone {
+    font-size:1em;
+    padding:2px;
+}
+.easymap-info-address {
+    font-size:1em;
+    padding:2px;
+    margin-top:5px;
+}
+.easymap-info-description {
+    width:100%;
+    font-size:1.1em;
+    padding:2px;
+    margin-top:5px;
+    border-top:2px solid #a0a0a0;
+}
+.easymap-info-description-text {
+    margin-top:5px;
+}
+.easymap-info-link {
+    text-decoration:none;
+    color:inherit;
+}
+.easymap-info-link:hover {
+    text-decoration:underline;
+    color:inherit;
+}
+.easymap-info-link:visited {
+    text-decoration:underline;
+    color:inherit;
+}
+.gm-style-iw { /* Google Maps infowindow content */
+    background-color:white !important;
+    overflow-x:hidden !important;
+    border:2px solid black;
+}
+.gm-style-iw-d { /* Google Maps infowindow outside content */
+    background-color:white !important;
+}
+.gm-style-iw-c { /* Google Maps infowindow outside content */
+    background-color:white !important;
+}
+
+.easymap-is-hidden {
+    display:none;
+}
+.easymap-is-visible-block {
+    display:block;
+}
+
+/* end of file "easymap-public.css" */

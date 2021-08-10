@@ -1,0 +1,11 @@
+/*
+ * This file should be renamed to easymap-public-custom.css to be activated
+ */
+#easymap-map {
+    border:3px solid #888 !important;
+    display:block;
+    width:auto;
+    max-width:1200px;
+    height:400px;
+    margin:auto;
+}
