@@ -32,17 +32,20 @@ namespace easymap;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
+    error_log( basename(__FILE__) . ': WPINC not defined, exiting' );
     die;
 }
 if ( ! defined( 'ABSPATH' ) ) {
+    error_log( basename(__FILE__) . ': ABSPATH not defined, exiting' );
     die( '-1' );
 }
 if ( ! defined( 'EASYMAP_WORDPRESS_PLUGIN' ) ) {
+    error_log( basename(__FILE__) . ': EASYMAP_WORDPRESS_PLUGIN not defined, exiting' );
     die( '-1' );
 }
 
 
-if ( ! class_exists( 'EasyMap_Utility' ) ) {
+if ( ! class_exists( 'easymap\EasyMap_Utility' ) ) {
 
 class EasyMap_Utility {
     public static $instance = null;
@@ -145,9 +148,6 @@ class EasyMap_Utility {
 
 } // class EasyMap_Utility
 
-
-// "Global" instance
-$Utility = EasyMap_Utility::getInstance( );
 
 } // ! class_exists( 'EasyMap_Utility' )
 

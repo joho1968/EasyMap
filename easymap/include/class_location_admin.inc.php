@@ -48,11 +48,9 @@ if ( ! defined( 'EASYMAP_LOCATION_LIST_PAGE_NAME' ) ) {
     define( 'EASYMAP_LOCATION_LIST_PAGE_NAME', 'easymap-locations'   );
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'class_easymap_util.inc.php' );
-
-
 class EasyMap_Location_List extends \WP_List_Table {
     public static $instance = null;
+    protected $Utility;                                         // @since 1.0.1
     protected array $easymap_notify;                            // @since 1.0.0
     protected int $easymap_icon_style;                          // @since 1.0.0
     protected $easymap_location_list;                           // @since 1.0.0
@@ -60,20 +58,21 @@ class EasyMap_Location_List extends \WP_List_Table {
     protected $locale;                                          // @since 1.0.0
     protected $single_item_edit_nonce;                          // @since 1.0.0
 
-    public static function getInstance( int $icon_style, array $location_list, string $locale ) {
-        null === self::$instance AND self::$instance = new self( $icon_style, $location_list, $locale );
+    public static function getInstance( int $icon_style, array $location_list, string $locale, $Utility ) {
+        null === self::$instance AND self::$instance = new self( $icon_style, $location_list, $locale, $Utility );
         return( self::$instance );
     }
     /**
     * Start me up ...
     */
-    public function __construct( int $icon_style, array $location_list, string $locale ) {
+    public function __construct( int $icon_style, array $location_list, string $locale, $Utility ) {
         parent::__construct( array(
                                 'singular' => 'easymap-location',
                                 'plural'   => 'easymap-locations',
                                 'ajax'     => false,
                                 )
                             );
+        $this->Utility = $Utility;
         $this->easymap_icon_style = $icon_style;
         $this->easymap_location_list = $location_list;
         $this->easymap_notify = array();
@@ -146,9 +145,7 @@ class EasyMap_Location_List extends \WP_List_Table {
      * @since 1.0.0
      */
     public function mangle_url_scheme( string $url, string $scheme, $orig_scheme ) : string {
-        global $Utility;
-
-        if ( ! empty( $url ) && $Utility->x_strpos( $url, '?page=' . EASYMAP_LOCATION_LIST_PAGE_NAME ) !== false && isset( $_REQUEST['s'] ) ) {
+        if ( ! empty( $url ) && $this->Utility->x_strpos( $url, '?page=' . EASYMAP_LOCATION_LIST_PAGE_NAME ) !== false && isset( $_REQUEST['s'] ) ) {
             $url = add_query_arg( 's', rawurlencode( $_REQUEST['s'] ), $url );
             if ( ! empty( $_POST['_wpnonce'] ) && empty( $_GET['_wpnonce'] ) ) {
                 $url = add_query_arg( '_wpnonce', urlencode( $_POST['_wpnonce'] ), $url );
@@ -399,8 +396,6 @@ class EasyMap_Location_List extends \WP_List_Table {
      * @since 1.0.0
      */
     protected function get_locations( string $search_string ) {
-        global $Utility;
-
         if ( ! empty( $search_string ) ) {
             $db_results = array();
             $is_numeric = is_numeric( $search_string );
@@ -410,14 +405,14 @@ class EasyMap_Location_List extends \WP_List_Table {
                 }
                 if ( $is_numeric ) {
                     // This will match '11' with '11', '110', '115', etc.
-                    $match = $Utility->x_strpos( (string)$v['id'], $search_string ) === 0;
+                    $match = $this->Utility->x_strpos( (string)$v['id'], $search_string ) === 0;
                 } else {
                     // This will match anywhere in the string, insensitively
-                    $match = ( $Utility->x_stripos( $v['na'], $search_string ) !== false
+                    $match = ( $this->Utility->x_stripos( $v['na'], $search_string ) !== false
                                ||
-                               $Utility->x_stripos( $v['al'], $search_string ) !== false
+                               $this->Utility->x_stripos( $v['al'], $search_string ) !== false
                                ||
-                               $Utility->x_stripos( $v['ci'], $search_string ) !== false );
+                               $this->Utility->x_stripos( $v['ci'], $search_string ) !== false );
                 }
                 if ( $match ) {
                     $db_results[] = $v;

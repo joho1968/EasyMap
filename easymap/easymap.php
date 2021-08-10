@@ -11,7 +11,7 @@
  * Plugin Name:       EasyMap
  * Plugin URI:        https://code.webbplatsen.net/wordpress/easymap/
  * Description:       Uncomplicated map functionality for WordPress
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            WebbPlatsen, Joaquim Homrighausen <joho@webbplatsen.se>
  * Author URI:        https://webbplatsen.se/
  * License:           GPL-2.0+
@@ -50,9 +50,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     die( '-1' );
 }
 
-
 define( 'EASYMAP_WORDPRESS_PLUGIN',        true                    );
-define( 'EASYMAP_VERSION',                 '1.0.0'                 );
+define( 'EASYMAP_VERSION',                 '1.0.1'                 );
 define( 'EASYMAP_REV',                     1                       );
 define( 'EASYMAP_PLUGINNAME_HUMAN',        'EasyMap'               );
 define( 'EASYMAP_PLUGINNAME_SLUG',         'easymap'               );
@@ -69,19 +68,13 @@ define( 'EASYMAP_ADDRESS_TEMPLATE_UK',     2                       );
 define( 'EASYMAP_ADDRESS_TEMPLATE_US',     3                       );
 define( 'EASYMAP_ADDRESS_TEMPLATE_CUSTOM', 4                       );
 
-$EasyMap_Templates_ID = array(
-    EASYMAP_ADDRESS_TEMPLATE_EU,
-    EASYMAP_ADDRESS_TEMPLATE_UK,
-    EASYMAP_ADDRESS_TEMPLATE_US,
-    EASYMAP_ADDRESS_TEMPLATE_CUSTOM
-    );
-
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'include/class_easymap_util.inc.php' );
 
 class EasyMap {
     public static $instance = null;
-    protected $easymap_plugin_version;
+    protected $Utility;                                        // @since 1.0.1
+    protected $easymap_plugin_version;                         // @since 1.0.0
     protected $easymap_have_scfa;                              // @since 1.0.0
     protected bool $easymap_mail_error;                        // @since 1.0.0
     protected int $easymap_icon_style;                         // @since 1.0.0
@@ -92,6 +85,7 @@ class EasyMap {
     protected $easymap_did_map_shortcode;                      // @since 1.0.0
     protected $easymap_templates;                              // @since 1.0.0
     protected $easymap_form_tab;                               // @since 1.0.0
+    protected $EasyMap_Templates_ID;                           // @since 1.0.1
 
     protected $easymap_location_list;                          // @since 1.0.0
     protected $easymap_google_disable_notifications;           // @since 1.0.0
@@ -123,9 +117,6 @@ class EasyMap {
      * Start me up ...
      */
     public function __construct( string $version = '' ) {
-        global $Utility;
-        global $EasyMap_Templates_ID;
-
         if ( defined( 'EASYMAP_DEBUG' ) && EASYMAP_DEBUG ) {
             if ( ! empty( $_POST)) {
                 error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): POST' . "\n" . var_export( $_POST, true ) );
@@ -142,6 +133,18 @@ class EasyMap {
             }
         } else {
             $this->easymap_plugin_version = $version;
+        }
+        // Our templates
+        $this->EasyMap_Templates_ID = array(
+            EASYMAP_ADDRESS_TEMPLATE_EU,
+            EASYMAP_ADDRESS_TEMPLATE_UK,
+            EASYMAP_ADDRESS_TEMPLATE_US,
+            EASYMAP_ADDRESS_TEMPLATE_CUSTOM
+            );
+        // Utilities
+        $this->Utility = EasyMap_Utility::getInstance();
+        if ( ! is_object( $this->Utility ) ) {
+            error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): Unable to create $Utility instance (?)' );
         }
         // Try to retain our last used tab. This is lost since WordPress
         // actually calls the constructor twice on an options.php form page
@@ -169,7 +172,7 @@ class EasyMap {
         $this->easymap_locale = $wp_lang . '.' . $wp_charset;
 
         // Make sure we notify about missing mbstring
-        if ( ! $Utility->x_have_mbstring() ) {
+        if ( ! $this->Utility->x_have_mbstring() ) {
             add_action( 'admin_notices', [$this, 'easymap_admin_alert_missing_mbstring'] );
         }
         // See if Shortcodes for Font Awesome (SCFA) is present
@@ -324,7 +327,7 @@ class EasyMap {
         }
         // Setup useful array with template IDs and names
         $this->easymap_templates = array();
-        foreach( $EasyMap_Templates_ID as $k => $v) {
+        foreach( $this->EasyMap_Templates_ID as $k => $v) {
             $template_data = $this->easymap_template_to_data( $v );
             switch( $v ) {
                 case EASYMAP_ADDRESS_TEMPLATE_EU:
@@ -933,37 +936,31 @@ class EasyMap {
         return( substr( sanitize_text_field( trim( $input ) ), 0, 200 ) );
     }
     public function easymap_setting_sanitize_google_language( $input ) {
-        global $Utility;
-
         if ( ! is_admin( ) || ! is_user_logged_in() || ! current_user_can( 'administrator' ) )  {
             return;
         }
         if ( defined( 'EASYMAP_DEBUG' ) && EASYMAP_DEBUG ) {
             error_log( basename(__FILE__) . ' (' . __FUNCTION__ . ')' );
         }
-        return( $Utility->x_substr( sanitize_text_field( trim( $input ) ), 0, 16 ) );
+        return( $this->Utility->x_substr( sanitize_text_field( trim( $input ) ), 0, 16 ) );
     }
     public function easymap_setting_sanitize_google_region( $input ) {
-        global $Utility;
-
         if ( ! is_admin( ) || ! is_user_logged_in() || ! current_user_can( 'administrator' ) )  {
             return;
         }
         if ( defined( 'EASYMAP_DEBUG' ) && EASYMAP_DEBUG ) {
             error_log( basename(__FILE__) . ' (' . __FUNCTION__ . ')' );
         }
-        return( $Utility->x_substr( sanitize_text_field( trim( $input ) ), 0, 16 ) );
+        return( $this->Utility->x_substr( sanitize_text_field( trim( $input ) ), 0, 16 ) );
     }
     public function easymap_setting_sanitize_google_country( $input ) {
-        global $Utility;
-
         if ( ! is_admin( ) || ! is_user_logged_in() || ! current_user_can( 'administrator' ) )  {
             return;
         }
         if ( defined( 'EASYMAP_DEBUG' ) && EASYMAP_DEBUG ) {
             error_log( basename(__FILE__) . ' (' . __FUNCTION__ . ')' );
         }
-        return( $Utility->x_substr( sanitize_text_field( trim( $input ) ), 0, 64 ) );
+        return( $this->Utility->x_substr( sanitize_text_field( trim( $input ) ), 0, 64 ) );
     }
     /*
     public function easymap_setting_sanitize_google_marker_color( $input ) {
@@ -977,16 +974,14 @@ class EasyMap {
     }
     */
     public function easymap_setting_sanitize_textarea_setting( $input ) {
-        global $Utility;
-
         if ( ! is_admin( ) || ! is_user_logged_in() || ! current_user_can( 'administrator' ) )  {
             return;
         }
         $input = explode( "\n", sanitize_textarea_field( $input ) );
         $output = array();
         foreach( $input as $one_line ) {
-            $one_line = trim( $Utility->x_substr( $one_line, 0, 80 ) );
-            if ( $Utility->x_strlen( $one_line ) > 0 ) {
+            $one_line = trim( $this->Utility->x_substr( $one_line, 0, 80 ) );
+            if ( $this->Utility->x_strlen( $one_line ) > 0 ) {
                 $output[] = $one_line;
             }
         }
@@ -1012,8 +1007,6 @@ class EasyMap {
         return( $xs );
     }
     public function easymap_setting_sanitize_custom_template( $input ) {
-        global $Utility;
-
         if ( ! is_admin( ) || ! is_user_logged_in() || ! current_user_can( 'administrator' ) )  {
             return;
         }
@@ -1024,13 +1017,13 @@ class EasyMap {
             error_log( 'Input: "' . print_r( $input, true ) . '"' );
         }
         // Accept {br}, just in case
-        $input = str_replace( '{br}', "\n", wp_kses( $input, 'strip' ) );
+        $input = str_replace( '{br}', "\n", wp_kses_post( $input ) );
         // Split on newline \n
         $input = explode( "\n", $input );
         // Put it all back together
         $output = '';
         foreach( $input as $one_line ) {
-            $output .= trim( $Utility->x_substr( $one_line, 0, 80 ) ) . '{br}';
+            $output .= trim( $this->Utility->x_substr( $one_line, 0, 80 ) ) . '{br}';
         }
         if ( defined( 'EASYMAP_DEBUG' ) && EASYMAP_DEBUG && defined( 'EASYMAP_DEBUG_OPTIONS' ) && EASYMAP_DEBUG_OPTIONS ) {
             error_log( 'Output: "' . print_r( $output, true ) . '"' );
@@ -1319,8 +1312,6 @@ class EasyMap {
      * @since  1.0.0
      */
     public function easymap_admin_import() {
-        global $Utility;
-
         if ( ! is_admin( ) || ! is_user_logged_in() || ! current_user_can( 'administrator' ) )  {
             return;
         }
@@ -1420,20 +1411,20 @@ class EasyMap {
                                         } else {
                                             $used_slot = $brec['id'] = $empty_slot;
                                         }
-                                        $brec['na'] = $Utility->x_substr( sanitize_text_field( trim( $v['na'] ) ), 0, 100 );
-                                        if ( ! empty( $v['al'] ) ) $brec['al'] = $Utility->x_substr( sanitize_text_field( trim( $v['al'] ) ), 0,  64 );
-                                        if ( ! empty( $v['co'] ) ) $brec['co'] = $Utility->x_substr( sanitize_text_field( trim( $v['co'] ) ), 0,   7 );
-                                        if ( ! empty( $v['sa'] ) ) $brec['sa'] = $Utility->x_substr( sanitize_text_field( trim( $v['sa'] ) ), 0, 100 );
-                                        if ( ! empty( $v['sn'] ) ) $brec['sn'] = $Utility->x_substr( sanitize_text_field( trim( $v['sn'] ) ), 0,  20 );
-                                        if ( ! empty( $v['ci'] ) ) $brec['ci'] = $Utility->x_substr( sanitize_text_field( trim( $v['ci'] ) ), 0, 100 );
-                                        if ( ! empty( $v['st'] ) ) $brec['st'] = $Utility->x_substr( sanitize_text_field( trim( $v['st'] ) ), 0, 100 );
-                                        if ( ! empty( $v['pc'] ) ) $brec['pc'] = $Utility->x_substr( sanitize_text_field( trim( $v['pc'] ) ), 0, 100 );
-                                        if ( ! empty( $v['ph'] ) ) $brec['ph'] = $Utility->x_substr( sanitize_text_field( trim( $v['ph'] ) ), 0, 100 );
-                                        if ( ! empty( $v['em'] ) ) $brec['em'] = $Utility->x_substr( sanitize_text_field( trim( $v['em'] ) ), 0, 100 );
-                                        if ( ! empty( $v['ws'] ) ) $brec['ws'] = $Utility->x_substr( sanitize_text_field( trim( $v['ws'] ) ), 0, 100 );
-                                        if ( ! empty( $v['no'] ) ) $brec['no'] = $Utility->x_substr( wp_kses( trim( $v['no'] ), 'strip' ), 0, 1024 );
-                                        if ( ! empty( $v['la'] ) ) $brec['la'] = $Utility->x_substr( sanitize_text_field( trim( $v['la'] ) ), 0,  32 );
-                                        if ( ! empty( $v['lo'] ) ) $brec['lo'] = $Utility->x_substr( sanitize_text_field( trim( $v['lo'] ) ), 0,  32 );
+                                        $brec['na'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['na'] ) ), 0, 100 );
+                                        if ( ! empty( $v['al'] ) ) $brec['al'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['al'] ) ), 0,  64 );
+                                        if ( ! empty( $v['co'] ) ) $brec['co'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['co'] ) ), 0,   7 );
+                                        if ( ! empty( $v['sa'] ) ) $brec['sa'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['sa'] ) ), 0, 100 );
+                                        if ( ! empty( $v['sn'] ) ) $brec['sn'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['sn'] ) ), 0,  20 );
+                                        if ( ! empty( $v['ci'] ) ) $brec['ci'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['ci'] ) ), 0, 100 );
+                                        if ( ! empty( $v['st'] ) ) $brec['st'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['st'] ) ), 0, 100 );
+                                        if ( ! empty( $v['pc'] ) ) $brec['pc'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['pc'] ) ), 0, 100 );
+                                        if ( ! empty( $v['ph'] ) ) $brec['ph'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['ph'] ) ), 0, 100 );
+                                        if ( ! empty( $v['em'] ) ) $brec['em'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['em'] ) ), 0, 100 );
+                                        if ( ! empty( $v['ws'] ) ) $brec['ws'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['ws'] ) ), 0, 100 );
+                                        if ( ! empty( $v['no'] ) ) $brec['no'] = $this->Utility->x_substr( wp_kses_post( trim( $v['no'] ) ), 0, 1024 );
+                                        if ( ! empty( $v['la'] ) ) $brec['la'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['la'] ) ), 0,  32 );
+                                        if ( ! empty( $v['lo'] ) ) $brec['lo'] = $this->Utility->x_substr( sanitize_text_field( trim( $v['lo'] ) ), 0,  32 );
                                         if ( ! empty( $v['ma'] ) ) $brec['ma'] = $v['ma'];
                                         if ( ! empty( $v['ac'] ) ) $brec['ac'] = $v['ac'];
                                         //Copy to actual list
@@ -1465,7 +1456,7 @@ class EasyMap {
                     if ( ! isset( $_POST['easymap-csvimportdata'] ) ) {
                         $easymap_csv_importdata = '';
                     } else {
-                        $easymap_csv_importdata = $Utility->x_stripslashes( $_POST['easymap-csvimportdata'] );
+                        $easymap_csv_importdata = $this->Utility->x_stripslashes( $_POST['easymap-csvimportdata'] );
                     }
                     $csv_data = array();
                     // Make sure we have data
@@ -1528,20 +1519,20 @@ class EasyMap {
                                     } else {
                                         $used_slot = $brec['id'] = $empty_slot;
                                     }
-                                    $brec['al'] = $Utility->x_substr( sanitize_text_field( trim( $v[1] ) ), 0,  64 );
-                                    $brec['na'] = $Utility->x_substr( sanitize_text_field( trim( $v[2] ) ), 0, 100 );
-                                    $brec['sa'] = $Utility->x_substr( sanitize_text_field( trim( $v[3] ) ), 0, 100 );
-                                    $brec['sn'] = $Utility->x_substr( sanitize_text_field( trim( $v[4] ) ), 0,  20 );
-                                    $brec['ci'] = $Utility->x_substr( sanitize_text_field( trim( $v[5] ) ), 0, 100 );
-                                    $brec['st'] = $Utility->x_substr( sanitize_text_field( trim( $v[6] ) ), 0, 100 );
-                                    $brec['pc'] = $Utility->x_substr( sanitize_text_field( trim( $v[7] ) ), 0, 100 );
-                                    $brec['ph'] = $Utility->x_substr( sanitize_text_field( trim( $v[8] ) ), 0, 100 );
-                                    $brec['em'] = $Utility->x_substr( sanitize_text_field( trim( $v[9] ) ), 0, 100 );
-                                    $brec['ws'] = $Utility->x_substr( sanitize_text_field( trim( $v[10] ) ), 0, 100 );
-                                    $brec['la'] = $Utility->x_substr( sanitize_text_field( trim( $v[11] ) ), 0,  32 );
-                                    $brec['lo'] = $Utility->x_substr( sanitize_text_field( trim( $v[12] ) ), 0,  32 );
+                                    $brec['al'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[1] ) ), 0,  64 );
+                                    $brec['na'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[2] ) ), 0, 100 );
+                                    $brec['sa'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[3] ) ), 0, 100 );
+                                    $brec['sn'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[4] ) ), 0,  20 );
+                                    $brec['ci'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[5] ) ), 0, 100 );
+                                    $brec['st'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[6] ) ), 0, 100 );
+                                    $brec['pc'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[7] ) ), 0, 100 );
+                                    $brec['ph'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[8] ) ), 0, 100 );
+                                    $brec['em'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[9] ) ), 0, 100 );
+                                    $brec['ws'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[10] ) ), 0, 100 );
+                                    $brec['la'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[11] ) ), 0,  32 );
+                                    $brec['lo'] = $this->Utility->x_substr( sanitize_text_field( trim( $v[12] ) ), 0,  32 );
                                     $brec['ac'] = (int)$v[13];
-                                    $brec['no'] = $Utility->x_substr( wp_kses( trim( $v[14] ), 'strip' ), 0, 1024 );
+                                    $brec['no'] = $this->Utility->x_substr( wp_kses_post( trim( $v[14] ) ), 0, 1024 );
                                     //Copy to actual list
                                     $this->easymap_location_list[$used_slot] = $brec;
                                     $import_count++;
@@ -1607,7 +1598,7 @@ class EasyMap {
                                     foreach( $v as $cfg_option => $cfg_value ) {
                                         $option[$cfg_option] = $cfg_value;
                                     }
-                                    if ( empty( $option['option_name'] ) || ! isset( $option['option_value'] ) || $Utility->x_strpos( $option['option_name'], EASYMAP_PLUGINNAME_SLUG . '-' ) === false ) {
+                                    if ( empty( $option['option_name'] ) || ! isset( $option['option_value'] ) || $this->Utility->x_strpos( $option['option_name'], EASYMAP_PLUGINNAME_SLUG . '-' ) === false ) {
                                         if ( defined( 'EASYMAP_DEBUG' ) && EASYMAP_DEBUG ) {
                                             error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): Skipped unknown option "' . $option['option_name'] . '"' );
                                             error_log( print_r( $json_data, true ) );
@@ -1747,8 +1738,6 @@ class EasyMap {
         echo '</style>';
     }
     public function easymap_admin_locations() {
-        global $Utility;
-
         if ( ! is_admin( ) || ! is_user_logged_in() || ! current_user_can( 'administrator' ) )  {
             return;
         }
@@ -1778,22 +1767,22 @@ class EasyMap {
                             if ( ! empty( $_POST['easymap_nonce'] ) ) {
                                 if ( wp_verify_nonce( $_POST['easymap_nonce'], 'easymap-location-edit') ) {
                                     $form_validation = true;
-                                    $post_alias = ( empty( $_POST['alias'] ) ? '':$Utility->x_substr( sanitize_text_field( trim( $_POST['alias'] ) ), 0, 64 ) );
-                                    $post_name = ( empty( $_POST['name'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( sanitize_text_field( trim( $_POST['name'] ) ), 0, 100 ) ) );
-                                    $post_color = ( empty( $_POST['color'] ) ? '':$Utility->x_substr( sanitize_text_field( trim( $_POST['color'] ) ), 0, 7 ) );
-                                    //$post_description = ( empty( $_POST['description'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( sanitize_textarea_field( trim( $_POST['description'] ) ), 0, 1024 ) ) );
-                                    $post_description = ( empty( $_POST['description'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( wp_kses( trim( $_POST['description'] ), 'strip' ), 0, 1024 ) ) );
-                                    $post_address = ( empty( $_POST['address'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( sanitize_text_field( trim( $_POST['address'] ) ), 0, 100 ) ) );
-                                    $post_number = ( empty( $_POST['number'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( sanitize_text_field( trim( $_POST['number'] ) ), 0, 20 ) ) );
-                                    $post_city = ( empty( $_POST['city'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( sanitize_text_field( trim( $_POST['city'] ) ), 0, 100 ) ) );
-                                    $post_state = ( empty( $_POST['state'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( sanitize_text_field( trim( $_POST['state'] ) ), 0, 100 ) ) );
-                                    $post_zip = ( empty( $_POST['zip'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( sanitize_text_field( trim( $_POST['zip'] ) ), 0, 100 ) ) );
-                                    $post_phone = ( empty( $_POST['phone'] ) ? '':$Utility->x_stripslashes( $Utility->x_substr( sanitize_text_field( trim( $_POST['phone'] ) ), 0, 100 ) ) );
-                                    $post_email = ( empty( $_POST['email'] ) ? '':$Utility->x_substr( sanitize_text_field( trim( $_POST['email'] ) ), 0, 100 ) );
-                                    $post_website = ( empty( $_POST['website'] ) ? '':$Utility->x_substr( sanitize_text_field( trim( $_POST['website'] ) ), 0, 100 ) );
-                                    $post_pos_lat = ( empty( $_POST['pos_lat'] ) ? '':$Utility->x_substr( sanitize_text_field( trim( $_POST['pos_lat'] ) ), 0, 32 ) );
-                                    $post_pos_long = ( empty( $_POST['pos_long'] ) ? '':$Utility->x_substr( sanitize_text_field( trim( $_POST['pos_long'] ) ), 0, 32 ) );
-                                    if ( $Utility->x_strlen( $post_name ) < 2 ) {
+                                    $post_alias = ( empty( $_POST['alias'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['alias'] ) ), 0, 64 ) );
+                                    $post_name = ( empty( $_POST['name'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['name'] ) ), 0, 100 ) ) );
+                                    $post_color = ( empty( $_POST['color'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['color'] ) ), 0, 7 ) );
+                                    //$post_description = ( empty( $_POST['description'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_textarea_field( trim( $_POST['description'] ) ), 0, 1024 ) ) );
+                                    $post_description = ( empty( $_POST['description'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( wp_kses_post( trim( $_POST['description'] ) ), 0, 1024 ) ) );
+                                    $post_address = ( empty( $_POST['address'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['address'] ) ), 0, 100 ) ) );
+                                    $post_number = ( empty( $_POST['number'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['number'] ) ), 0, 20 ) ) );
+                                    $post_city = ( empty( $_POST['city'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['city'] ) ), 0, 100 ) ) );
+                                    $post_state = ( empty( $_POST['state'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['state'] ) ), 0, 100 ) ) );
+                                    $post_zip = ( empty( $_POST['zip'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['zip'] ) ), 0, 100 ) ) );
+                                    $post_phone = ( empty( $_POST['phone'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['phone'] ) ), 0, 100 ) ) );
+                                    $post_email = ( empty( $_POST['email'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['email'] ) ), 0, 100 ) );
+                                    $post_website = ( empty( $_POST['website'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['website'] ) ), 0, 100 ) );
+                                    $post_pos_lat = ( empty( $_POST['pos_lat'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['pos_lat'] ) ), 0, 32 ) );
+                                    $post_pos_long = ( empty( $_POST['pos_long'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['pos_long'] ) ), 0, 32 ) );
+                                    if ( $this->Utility->x_strlen( $post_name ) < 2 ) {
                                         $form_validation = false;
                                         echo '<div class="notice notice-error is-dismissible"><p>'.
                                              esc_html__( 'Location name must be two characters or more', 'easymap' ) .
@@ -1801,7 +1790,7 @@ class EasyMap {
                                              '</div>';
                                     }
                                     if ( $form_validation ) {
-                                        if ( ! empty( $post_color ) && $Utility->x_strlen( $post_color ) !== 7 && $Utility->x_strlen( $post_color ) !== 3 ) {
+                                        if ( ! empty( $post_color ) && $this->Utility->x_strlen( $post_color ) !== 7 && $this->Utility->x_strlen( $post_color ) !== 3 ) {
                                             $form_validation = false;
                                             echo '<div class="notice notice-error is-dismissible"><p>'.
                                                  esc_html__( 'Location color must be # followed by three or six hexadecimal digits (0-9a-f)', 'easymap' ) .
@@ -1940,7 +1929,8 @@ class EasyMap {
 
             $location_list = Easymap_Location_List::getInstance( $this->easymap_icon_style,
                                                                  $this->easymap_location_list,
-                                                                 $this->easymap_locale );
+                                                                 $this->easymap_locale,
+                                                                 $this->Utility );
             $location_list->prepare_items();// This must go before the search_box() call
             echo $location_list->show_notifications(true);
 
@@ -2008,21 +1998,21 @@ class EasyMap {
             // error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): Retaining fields' );
             $pr = $this->easymap_init_location( false );
             $pr['id'] = $_POST['location'];
-            $pr['al'] = $Utility->x_strtolower( $Utility->x_substr( sanitize_text_field( trim( $_POST['alias'] ) ), 0, 64 ) );
-            $pr['na'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['name'] ) ), 0, 100 );
-            //$pr['co'] = sanitize_hex_color( $Utility->x_substr( trim( $_POST['color'] ), 0, 7 ) );
-            $pr['sa'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['address'] ) ), 0, 100 );
-            $pr['sn'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['number'] ) ), 0, 20 );
-            $pr['ci'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['city'] ) ), 0, 100 );
-            $pr['st'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['state'] ) ), 0, 100 );
-            $pr['pc'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['zip'] ) ), 0, 100 );
-            $pr['ph'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['phone'] ) ), 0, 100 );
-            $pr['em'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['email'] ) ), 0, 100 );
-            $pr['ws'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['website'] ) ), 0, 100 );
-            $pr['la'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['pos_lat'] ) ), 0, 32 );
-            $pr['lo'] = $Utility->x_substr( sanitize_text_field( trim( $_POST['pos_long'] ) ), 0, 32 );
-            //$pr['no'] = $Utility->x_substr( sanitize_textarea_field( wp_kses( trim( $_POST['description'] ), 'strip' ) ), 0, 1024 );
-            $pr['no'] = $Utility->x_substr( wp_kses( trim( $_POST['description'] ), 'strip' ) , 0, 1024 );
+            $pr['al'] = $this->Utility->x_strtolower( $Utility->x_substr( sanitize_text_field( trim( $_POST['alias'] ) ), 0, 64 ) );
+            $pr['na'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['name'] ) ), 0, 100 );
+            //$pr['co'] = sanitize_hex_color( $this->Utility->x_substr( trim( $_POST['color'] ), 0, 7 ) );
+            $pr['sa'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['address'] ) ), 0, 100 );
+            $pr['sn'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['number'] ) ), 0, 20 );
+            $pr['ci'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['city'] ) ), 0, 100 );
+            $pr['st'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['state'] ) ), 0, 100 );
+            $pr['pc'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['zip'] ) ), 0, 100 );
+            $pr['ph'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['phone'] ) ), 0, 100 );
+            $pr['em'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['email'] ) ), 0, 100 );
+            $pr['ws'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['website'] ) ), 0, 100 );
+            $pr['la'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['pos_lat'] ) ), 0, 32 );
+            $pr['lo'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['pos_long'] ) ), 0, 32 );
+            //$pr['no'] = $this->Utility->x_substr( sanitize_textarea_field( wp_kses_post( trim( $_POST['description'] ) ) ), 0, 1024 );
+            $pr['no'] = $this->Utility->x_substr( wp_kses_post( trim( $_POST['description'] ) ) , 0, 1024 );
             if ( ! empty( $_POST['active'] ) ) {
                 $pr['ac']   = true;
             } else {
@@ -2389,8 +2379,6 @@ class EasyMap {
      * @since 1.0.0
      */
     public function easymap_shortcode_map( $atts, $content, $tag ) {
-        global $Utility;
-
         if ( defined( 'EASYMAP_DEBUG' ) && EASYMAP_DEBUG ) {
             error_log( basename(__FILE__) . ' (' . __FUNCTION__ . ')' );
             error_log( '$atts: ' . var_export( $atts, true ) );
@@ -2432,7 +2420,7 @@ class EasyMap {
             }
         } else {
             // Specific markers specified
-            $atts['markers'] = $Utility->x_strtolower( $atts['markers'] );
+            $atts['markers'] = $this->Utility->x_strtolower( $atts['markers'] );
             $selected_markers = explode( ',', $atts['markers'], 255 );
             foreach( $selected_markers as $s_k => $s_v ) {
                 $s_v = trim( $s_v );
@@ -2478,15 +2466,15 @@ class EasyMap {
         }
         // Other arguments
         $show_poi = $this->easymap_google_show_poi;
-        if ( ! empty( $atts['poi'] ) && ( $atts['poi'] == '1' || $Utility->x_strtolower( $atts['poi'] ) == 'true' ) ) {
+        if ( ! empty( $atts['poi'] ) && ( $atts['poi'] == '1' || $this->Utility->x_strtolower( $atts['poi'] ) == 'true' ) ) {
             $show_poi = true;
         }
         $show_transit = $this->easymap_google_show_transit;
-        if ( ! empty( $atts['transit'] ) && ( $atts['transit'] == '1' || $Utility->x_strtolower( $atts['transit'] ) == 'true' ) ) {
+        if ( ! empty( $atts['transit'] ) && ( $atts['transit'] == '1' || $this->Utility->x_strtolower( $atts['transit'] ) == 'true' ) ) {
             $show_transit = true;
         }
         $show_landscape = $this->easymap_google_show_landscape;
-        if ( ! empty( $atts['landscape'] ) && ( $atts['landscape'] == '1' || $Utility->x_strtolower( $atts['landscape'] ) == 'true' ) ) {
+        if ( ! empty( $atts['landscape'] ) && ( $atts['landscape'] == '1' || $this->Utility->x_strtolower( $atts['landscape'] ) == 'true' ) ) {
             $show_landscape = true;
         }
         $show_zoom = $this->easymap_google_start_zoom;

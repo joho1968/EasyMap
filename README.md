@@ -1,6 +1,5 @@
 [![Software License](https://img.shields.io/badge/License-GPL%20v2-green.svg?style=flat-square)](LICENSE) [![PHP 7.2\+](https://img.shields.io/badge/PHP-7.2-blue?style=flat-square)](https://php.net) [![PHP 7.4\+](https://img.shields.io/badge/PHP-7.4-blue?style=flat-square)](https://php.net) [![WordPress 5](https://img.shields.io/badge/WordPress-5.8-orange?style=flat-square)](https://wordpress.org)
 
-
 # EasyMap
 
 Uncomplicated map functionality for WordPress.
@@ -55,10 +54,17 @@ This is a hard question to answer. There are no known incompatibilities.
 
 ## Changelog
 
+### 1.0.1
+* Correction of activation issue
+* Better handling of HTML in templates and description fields
+
 ### 1.0.0
 * Initial release
 
 ## Upgrade Notice
+
+### 1.0.1
+* Simply update the plugin from the WordPress plugins
 
 ### 1.0.0
 * Initial release
