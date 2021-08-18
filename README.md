@@ -23,7 +23,7 @@ The plugin is also available on [wordpress.org](https://wordpress.org/plugins/ea
 * Choose Google Maps details to be shown
 * Support for custom CSS
 * Export and Import locations and plugin configuration
-* Support for multiple address formats
+* Support for multiple location address formats
 
 ### Other notes:
 
@@ -54,6 +54,13 @@ This is a hard question to answer. There are no known incompatibilities.
 
 ## Changelog
 
+### 1.1.0
+* Location status (active/inactive) is now displayed in admin, and sortable
+* Locations with incomplete geolocation data are no longer displayed
+* Added option to enable "greedy" map control to allow for single finger touch movement on map
+* Added option to enable/disable Google Maps Streetview button
+* Added option to enable/disable Google Maps Fullscreen button
+
 ### 1.0.1
 * Correction of activation issue
 * Better handling of HTML in templates and description fields
@@ -62,6 +69,9 @@ This is a hard question to answer. There are no known incompatibilities.
 * Initial release
 
 ## Upgrade Notice
+
+### 1.1.0
+* Simply update the plugin from the WordPress plugins
 
 ### 1.0.1
 * Simply update the plugin from the WordPress plugins

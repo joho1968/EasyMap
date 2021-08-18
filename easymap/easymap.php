@@ -11,7 +11,7 @@
  * Plugin Name:       EasyMap
  * Plugin URI:        https://code.webbplatsen.net/wordpress/easymap/
  * Description:       Uncomplicated map functionality for WordPress
- * Version:           1.0.1
+ * Version:           1.1.0
  * Author:            WebbPlatsen, Joaquim Homrighausen <joho@webbplatsen.se>
  * Author URI:        https://webbplatsen.se/
  * License:           GPL-2.0+
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'EASYMAP_WORDPRESS_PLUGIN',        true                    );
-define( 'EASYMAP_VERSION',                 '1.0.1'                 );
+define( 'EASYMAP_VERSION',                 '1.1.0'                 );
 define( 'EASYMAP_REV',                     1                       );
 define( 'EASYMAP_PLUGINNAME_HUMAN',        'EasyMap'               );
 define( 'EASYMAP_PLUGINNAME_SLUG',         'easymap'               );
@@ -76,7 +76,6 @@ class EasyMap {
     protected $Utility;                                        // @since 1.0.1
     protected $easymap_plugin_version;                         // @since 1.0.0
     protected $easymap_have_scfa;                              // @since 1.0.0
-    protected bool $easymap_mail_error;                        // @since 1.0.0
     protected int $easymap_icon_style;                         // @since 1.0.0
     protected $easymap_locale;                                 // @since 1.0.0
     protected $easymap_tz_string;                              // @since 1.0.0
@@ -102,6 +101,9 @@ class EasyMap {
     protected $easymap_google_show_transit;                    // @since 1.0.0
     protected $easymap_google_show_landscape;                  // @since 1.0.0
     protected $easymap_google_show_typeselector;               // @since 1.0.0
+    protected $easymap_google_show_fullscreen;                 // @since 1.1.0
+    protected $easymap_google_show_streetview;                 // @since 1.1.0
+    protected $easymap_google_greedy_control;                  // @since 1.1.0
     protected $easymap_google_marker_animation;                // @since 1.0.0
     protected $easymap_google_marker_hovereffect;              // @since 1.0.0
     protected $easymap_settings_remove;                        // @since 1.0.0
@@ -290,6 +292,24 @@ class EasyMap {
             $this->easymap_google_show_typeselector = false;
         } else {
             $this->easymap_google_show_typeselector = true;
+        }
+        $this->easymap_google_show_fullscreen = get_option( 'easymap-google-show-fullscreen', null );
+        if ( $this->easymap_google_show_fullscreen === null || ! $this->easymap_google_show_fullscreen ) {
+            $this->easymap_google_show_fullscreen = false;
+        } else {
+            $this->easymap_google_show_fullscreen = true;
+        }
+        $this->easymap_google_show_streetview = get_option( 'easymap-google-show-streetview', null );
+        if ( $this->easymap_google_show_streetview === null || ! $this->easymap_google_show_streetview ) {
+            $this->easymap_google_show_streetview = false;
+        } else {
+            $this->easymap_google_show_streetview = true;
+        }
+        $this->easymap_google_greedy_control = get_option( 'easymap-google-greedy-control', null );
+        if ( $this->easymap_google_greedy_control === null || ! $this->easymap_google_greedy_control ) {
+            $this->easymap_google_greedy_control = false;
+        } else {
+            $this->easymap_google_greedy_control = true;
         }
         $this->easymap_google_marker_animation = get_option( 'easymap-google-marker-animation', null );
         if ( $this->easymap_google_marker_animation === null || ! $this->easymap_google_marker_animation ) {
@@ -831,6 +851,9 @@ class EasyMap {
                      '<pre>   poi=0|1</pre>' .
                      '<pre>   transit=0|1</pre>' .
                      '<pre>   landscape=0|1</pre>' .
+                     '<pre>   fullscreen=0|1</pre>' .
+                     '<pre>   streetview=0|1</pre>' .
+                     '<pre>   greedy=0|1</pre>' .
                      '<pre>   zoom=1-18</pre>';
             $html .= '</div>';// easymap-shortcode
             $html .= '<div id="easymap-about" class="easymap-tab-content easymap-is-hidden">'.
@@ -890,6 +913,9 @@ class EasyMap {
           add_settings_field( 'easymap-google-show-transit', '', [$this, 'easymap_setting_no_output'], 'easymap', 'easymap-settings', array( 'class' => 'easymap-is-hidden' ) );
           add_settings_field( 'easymap-google-show-landscape', '', [$this, 'easymap_setting_no_output'], 'easymap', 'easymap-settings', array( 'class' => 'easymap-is-hidden' ) );
           add_settings_field( 'easymap-google-show-typeselector', '', [$this, 'easymap_setting_no_output'], 'easymap', 'easymap-settings', array( 'class' => 'easymap-is-hidden' ) );
+          add_settings_field( 'easymap-google-show-fullscreen', '', [$this, 'easymap_setting_no_output'], 'easymap', 'easymap-settings', array( 'class' => 'easymap-is-hidden' ) );
+          add_settings_field( 'easymap-google-show-streetview', '', [$this, 'easymap_setting_no_output'], 'easymap', 'easymap-settings', array( 'class' => 'easymap-is-hidden' ) );
+          add_settings_field( 'easymap-google-greedy-control', '', [$this, 'easymap_setting_no_output'], 'easymap', 'easymap-settings', array( 'class' => 'easymap-is-hidden' ) );
           add_settings_field( 'easymap-google-marker-animation', esc_html__( 'Bouncing markers', 'easymap' ), [$this, 'easymap_setting_google_marker_animation'], 'easymap', 'easymap-settings', ['label_for' => 'easymap-google-marker-animation'] );
           add_settings_field( 'easymap-google-marker-hovereffect', esc_html__( 'Hover color switch', 'easymap' ), [$this, 'easymap_setting_google_marker_hover'], 'easymap', 'easymap-settings', ['label_for' => 'easymap-google-marker-hovereffect'] );
           add_settings_field( 'easymap-settings-remove', esc_html__( 'Remove settings', 'easymap' ), [$this, 'easymap_setting_remove'], 'easymap', 'easymap-settings', ['label_for' => 'easymap-settings-remove'] );
@@ -913,6 +939,9 @@ class EasyMap {
         register_setting( 'easymap', 'easymap-google-show-transit' );
         register_setting( 'easymap', 'easymap-google-show-landscape' );
         register_setting( 'easymap', 'easymap-google-show-typeselector' );
+        register_setting( 'easymap', 'easymap-google-show-fullscreen' );
+        register_setting( 'easymap', 'easymap-google-show-streetview' );
+        register_setting( 'easymap', 'easymap-google-greedy-control' );
         register_setting( 'easymap', 'easymap-google-marker-animation' );
         register_setting( 'easymap', 'easymap-google-marker-hovereffect' );
         register_setting( 'easymap', 'easymap-google-marker-address-template' );
@@ -1105,6 +1134,18 @@ class EasyMap {
         echo '<div><label for="easymap-google-show-typeselector">';
         echo '<input type="checkbox" name="easymap-google-show-typeselector" id="easymap-google-show-typeselector" value="1" ' . ( checked( $this->easymap_google_show_typeselector, 1, false ) ) . '/>';
         echo '<strong>' . esc_html__( 'Type selector', 'easymap' ) . '</strong> ';
+        echo '</label></div>';
+        echo '<div><label for="easymap-google-show-fullscreen">';
+        echo '<input type="checkbox" name="easymap-google-show-fullscreen" id="easymap-google-show-fullscreen" value="1" ' . ( checked( $this->easymap_google_show_fullscreen, 1, false ) ) . '/>';
+        echo '<strong>' . esc_html__( 'Fullscreen', 'easymap' ) . '</strong> ';
+        echo '</label></div>';
+        echo '<div><label for="easymap-google-show-streetview">';
+        echo '<input type="checkbox" name="easymap-google-show-streetview" id="easymap-google-show-streetview" value="1" ' . ( checked( $this->easymap_google_show_streetview, 1, false ) ) . '/>';
+        echo '<strong>' . esc_html__( 'Streetview', 'easymap' ) . '</strong> ';
+        echo '</label></div>';
+        echo '<div><label for="easymap-google-greedy-control">';
+        echo '<input type="checkbox" name="easymap-google-greedy-control" id="easymap-google-greedy-control" value="1" ' . ( checked( $this->easymap_google_greedy_control, 1, false ) ) . '/>';
+        echo '<strong>' . esc_html__( 'Greedy control', 'easymap' ) . '</strong> ';
         echo '</label></div>';
         echo '</div>';// easymap-settings-checkboxes
         echo '<p class="description">' . esc_html__( 'Configure various Google Maps features', 'easymap' ) .
@@ -2403,7 +2444,7 @@ class EasyMap {
         if ( empty( $atts['markers'] ) ) {
             // No markers specified
             foreach( $this->easymap_location_list as $k => $v ) {
-                if ( $v['ac'] ) {
+                if ( $v['ac'] && ! empty( $v['la'] ) && ! empty( $v['lo'] ) ) {
                     $markers[] = array( 'na' => $v['na'],
                                         'sa' => $v['sa'],
                                         'sn' => $v['sn'],
@@ -2465,17 +2506,53 @@ class EasyMap {
             }
         }
         // Other arguments
+        $greedy_control = $this->easymap_google_greedy_control;
+        if ( ! empty( $atts['greedy'] ) ) {
+            if  ( $atts['greedy'] == '1' || $this->Utility->x_strtolower( $atts['greedy'] ) == 'true' ) {
+                $greedy_control = true;
+            } else {
+                $greedy_control = false;
+            }
+        }
+        $show_fullscreen = $this->easymap_google_show_fullscreen;
+        if ( ! empty( $atts['fullscreen'] ) ) {
+            if  ( $atts['fullscreen'] == '1' || $this->Utility->x_strtolower( $atts['fullscreen'] ) == 'true' ) {
+                $show_fullscreen = true;
+            } else {
+                $show_fullscreen = false;
+            }
+        }
+        $show_streetview = $this->easymap_google_show_streetview;
+        if ( ! empty( $atts['streetview'] ) ) {
+            if  ( $atts['streetview'] == '1' || $this->Utility->x_strtolower( $atts['streetview'] ) == 'true' ) {
+                $show_streetview = true;
+            } else {
+                $show_streetview = false;
+            }
+        }
         $show_poi = $this->easymap_google_show_poi;
-        if ( ! empty( $atts['poi'] ) && ( $atts['poi'] == '1' || $this->Utility->x_strtolower( $atts['poi'] ) == 'true' ) ) {
-            $show_poi = true;
+        if ( ! empty( $atts['poi'] ) ) {
+            if ( $atts['poi'] == '1' || $this->Utility->x_strtolower( $atts['poi'] ) == 'true' ) {
+                $show_poi = true;
+            } else {
+                $show_poi = true;
+            }
         }
         $show_transit = $this->easymap_google_show_transit;
-        if ( ! empty( $atts['transit'] ) && ( $atts['transit'] == '1' || $this->Utility->x_strtolower( $atts['transit'] ) == 'true' ) ) {
-            $show_transit = true;
+        if ( ! empty( $atts['transit'] ) ) {
+            if ( $atts['transit'] == '1' || $this->Utility->x_strtolower( $atts['transit'] ) == 'true' ) {
+                $show_transit = true;
+            } else {
+                $show_transit = false;
+            }
         }
         $show_landscape = $this->easymap_google_show_landscape;
-        if ( ! empty( $atts['landscape'] ) && ( $atts['landscape'] == '1' || $this->Utility->x_strtolower( $atts['landscape'] ) == 'true' ) ) {
-            $show_landscape = true;
+        if ( ! empty( $atts['landscape'] ) ) {
+            if ( $atts['landscape'] == '1' || $this->Utility->x_strtolower( $atts['landscape'] ) == 'true' ) {
+                $show_landscape = true;
+            } else {
+                $show_landscape = false;
+            }
         }
         $show_zoom = $this->easymap_google_start_zoom;
         if ( ! empty( $atts['zoom'] ) && is_numeric( $atts['zoom'] ) ) {
@@ -2555,11 +2632,7 @@ class EasyMap {
                     var easymap_info_array = null;
                     const easymap_marker_std = {url:"https://maps.google.com/mapfiles/ms/icons/red-dot.png",};
                     const easymap_marker_yellow = {url:"https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",};
-                    const easymap_mapOptions = {
-                        ' . $easymap_posStart . '
-                        mapTypeControl: ' . ( ! empty( $this->easymap_google_show_typeselector ) ? 'true':'false' ) . ',
-                        ' . $easymap_styles . '
-                    };
+                    var easymap_mapOptions;
                     let easymap_markers = ' . @ json_encode( $markers /*, JSON_NUMERIC_CHECK */ ) . ';
                     let easymap_map;
                     let easymap_mapInfo;
@@ -2677,6 +2750,20 @@ class EasyMap {
                     }
                     function easymap_initmap() {
                         easymap_bounds = new google.maps.LatLngBounds();
+                        easymap_mapOptions = {
+                          ' . $easymap_posStart .
+                          ( ! empty( $show_fullscreen ) ?
+                            '' : 'zoomControlOptions: {
+                                    position: google.maps.ControlPosition.TOP_RIGHT,
+                                  },' ) .
+                          ( ! empty( $greedy_control ) ?
+                            'gestureHandling: "greedy",' : '' ) . '
+                          zoomControl: true,
+                          mapTypeControl: ' . ( ! empty( $this->easymap_google_show_typeselector ) ? 'true':'false' ) . ',
+                          streetViewControl: ' . ( ! empty( $show_streetview ) ? 'true':'false' ) . ',
+                          fullscreenControl: ' . ( ! empty( $show_fullscreen ) ? 'true':'false' ) . ',
+                          ' . $easymap_styles . '
+                        };
                         easymap_map = new google.maps.Map(document.getElementById("easymap-map"), easymap_mapOptions);
                         easymap_mapInfo = new google.maps.InfoWindow({content:"<h1>EasyMap</h1>"});
                         easymap_map.addListener("click", () => {

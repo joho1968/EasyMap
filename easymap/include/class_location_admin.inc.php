@@ -175,6 +175,7 @@ class EasyMap_Location_List extends \WP_List_Table {
             'al'   => __( 'Alias', 'easymap' ),
             'na'   => __( 'Name', 'easymap' ),
             'ci'   => __( 'City', 'easymap' ),
+            'ac'   => __( 'Active', 'easymap' ),
             );
         return( $table_columns );
     }
@@ -190,6 +191,7 @@ class EasyMap_Location_List extends \WP_List_Table {
                 'al' => array( 'al', true  ),
                 'na' => array( 'na', true  ),
                 'ci' => array( 'ci', true  ),
+                'ac' => array( 'ac', true  ),
         );
         return( $sortable );
     }
@@ -284,6 +286,13 @@ class EasyMap_Location_List extends \WP_List_Table {
                                    $addon_str );
                 } else {
                     $xs = '';
+                }
+                return( $xs );
+            case 'ac'://Active
+                if ( empty( $item[$column_name] ) ) {
+                    $xs = __( 'No' );
+                } else {
+                    $xs = __( 'Yes' );
                 }
                 return( $xs );
         }// switch
@@ -461,8 +470,12 @@ class EasyMap_Location_List extends \WP_List_Table {
             case 'id':
                 $result = (int)$a[$order_by] - (int)$b[$order_by];
                 break;
-            case 'active':
+            case 'ac':// Active, @since 1.1.0
                 $result = (int)$a[$order_by] - (int)$b[$order_by];
+                if ( $result === 0 ) {
+                    // Make search result less jumpy on equal status
+                    $result = (int)$a['id'] - (int)$b['id'];
+                }
                 break;
             default:
                 break;

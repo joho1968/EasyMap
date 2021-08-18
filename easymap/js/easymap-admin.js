@@ -57,7 +57,9 @@
             var visibleBlock = document.getElementById(linkAnchor);
             if (visibleBlock !== null) {
                 visibleBlock.classList.add('easymap-is-visible-block');
-                formTabE.value = e.href.substring(e.href.indexOf("#")+1);
+                if (formTabE !== null ) {
+                    formTabE.value = e.href.substring(e.href.indexOf("#")+1);
+                }
             } else {
                 console.log('Unable to fetch ID for '+e.getAttribute('data-toggle'));
             }
