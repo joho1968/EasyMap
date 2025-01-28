@@ -1,15 +1,15 @@
 # EasyMap WordPress plugin SWEDISH translation
-# Copyright (C) 2021 Joaquim Homrighausen
+# Copyright 2021-2025 Joaquim Homrighausen
 # This file is distributed under the same license as the EasyMap package.
 # Joaquim Homrighausen <joho@webbplatsen.se>, 2021.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: easymap 1.0.0\n"
+"Project-Id-Version: easymap 1.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:34+0200\n"
-"PO-Revision-Date: 2021-07-26 15:05+0200\n"
+"PO-Revision-Date: 2025-01-28 14:45+0200\n"
 "Last-Translator: Joaquim Homrighausen <joho@webbplatsen.se>\n"
 "Language-Team: SWEDISH <support@webbplatsen.se>\n"
 "Language: \n"
@@ -662,3 +662,20 @@ msgstr "Du kan också komplettera med parametrar för att ändra resultatet"
 #: easymap.php:832
 msgid "The parameters available are"
 msgstr "De tillgängliga parametrarna är"
+
+#: easymap.php
+msgid ""
+"Plugin that provides integration with Mattermost, including notifications "
+"and OAuth2 authentication"
+msgstr ""
+
+#: easymap.php
+msgid ""
+"Plugin that provides uncomplicated 2FA protection"
+msgstr ""
+
+#: easymap.php
+msgid ""
+"Security plugin that provides integration with fail2ban and many other "
+"security features for WordPress"
+msgstr ""

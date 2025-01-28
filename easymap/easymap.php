@@ -11,7 +11,7 @@
  * Plugin Name:       EasyMap
  * Plugin URI:        https://code.webbplatsen.net/wordpress/easymap/
  * Description:       Uncomplicated map functionality for WordPress
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            WebbPlatsen, Joaquim Homrighausen <joho@webbplatsen.se>
  * Author URI:        https://webbplatsen.se/
  * License:           GPL-2.0+
@@ -20,7 +20,7 @@
  * Domain Path:       /languages
  *
  * easymap.php
- * Copyright (C) 2021 Joaquim Homrighausen; all rights reserved.
+ * Copyright 2021-2025 Joaquim Homrighausen; all rights reserved.
  * Development sponsored by WebbPlatsen i Sverige AB, www.webbplatsen.se
  *
  * This file is part of EasyMap. EasyMap is free software.
@@ -51,9 +51,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'EASYMAP_WORDPRESS_PLUGIN',        true                    );
-define( 'EASYMAP_VERSION',                 '1.1.0'                 );
+define( 'EASYMAP_VERSION',                 '1.1.1'                 );
 define( 'EASYMAP_REV',                     1                       );
-define( 'EASYMAP_PLUGINNAME_HUMAN',        'EasyMap'               );
 define( 'EASYMAP_PLUGINNAME_SLUG',         'easymap'               );
 define( 'EASYMAP_DEFAULT_PREFIX',          'easymap'               );
 define( 'EASYMAP_DB_VERSION',              1                       );
@@ -120,11 +119,11 @@ class EasyMap {
      */
     public function __construct( string $version = '' ) {
         if ( defined( 'EASYMAP_DEBUG' ) && EASYMAP_DEBUG ) {
-            if ( ! empty( $_POST)) {
-                error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): POST' . "\n" . var_export( $_POST, true ) );
+            if ( ! empty( $_POST ) ) {
+                error_log( basename( __FILE__ ) . ' (' . __FUNCTION__ . '): POST' . "\n" . var_export( $_POST, true ) );
             }
-            if ( ! empty( $_REQUEST)) {
-                error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): REQUEST' . "\n" . var_export( $_REQUEST, true ) );
+            if ( ! empty( $_REQUEST ) ) {
+                error_log( basename( __FILE__ ) . ' (' . __FUNCTION__ . '): REQUEST' . "\n" . var_export( $_REQUEST, true ) );
             }
         }
         if ( empty( $version ) ) {
@@ -210,7 +209,7 @@ class EasyMap {
                 $ainit[$i] = $brec;
             }
             $this->easymap_location_list = $ainit;
-            update_option( 'easymap-location-list', json_encode( $this->easymap_location_list ) );
+            update_option( 'easymap-location-list', wp_json_encode( $this->easymap_location_list ) );
         }
         // ..Google Maps
         $this->easymap_google_disable_notifications = get_option( 'easymap-google-disable-notifications', null );
@@ -461,7 +460,7 @@ class EasyMap {
     public function easymap_admin_alert_missing_mbstring() {
         echo '<div class="notice notice-error"><br/>'.
              '<p>' . $this->easymap_make_icon_html( 'errornotice' ) . '&nbsp;' .
-             EASYMAP_PLUGINNAME_HUMAN . ': ' .
+             'EasyMap' . ': ' .
              esc_html__( 'mbstring-extensions are missing, contact server administrator to enable them', 'easymap' ) .
              '!' .
              '<br/><br/></p>';
@@ -470,7 +469,7 @@ class EasyMap {
     public function easymap_admin_alert_missing_google_geodata_apikey() {
         echo '<div class="notice notice-error"><br/>'.
              '<p>' . $this->easymap_make_icon_html( 'errornotice' ) . '&nbsp;' .
-             EASYMAP_PLUGINNAME_HUMAN . ': ' .
+             'EasyMap' . ': ' .
              esc_html__( 'Please configure an API key to be used for Google Geodata services', 'easymap' ) .
              '!' .
              '<br/><br/></p>';
@@ -635,7 +634,7 @@ class EasyMap {
      * @since    1.0.0
      */
     public function easymap_page_header( string $add_on_string = '', bool $return_html = false) {
-        $html = '<h2>' . $this->easymap_make_icon_html( 'appicon' ). '&nbsp;' . esc_html( EASYMAP_PLUGINNAME_HUMAN );
+        $html = '<h2>' . $this->easymap_make_icon_html( 'appicon' ). '&nbsp;' . esc_html( 'EasyMap' );
         if ( strlen( $add_on_string ) > 0 ) {
             $html .= ':&nbsp;' . $add_on_string;
         }
@@ -657,8 +656,8 @@ class EasyMap {
             return;
         }
         // Add our menu entry (stand-alone menu)
-        add_menu_page( esc_html__( EASYMAP_PLUGINNAME_HUMAN, 'easymap' ),
-                       esc_html__( EASYMAP_PLUGINNAME_HUMAN, 'easymap' ),
+        add_menu_page( esc_html__( 'EasyMap', 'easymap' ),
+                       esc_html__( 'EasyMap', 'easymap' ),
                        'manage_options',
                        EASYMAP_PLUGINNAME_SLUG,
                        [ $this, 'easymap_admin_page' ],
@@ -668,26 +667,26 @@ class EasyMap {
                      );
         // The first sub-menu page is a "duplicate" of the parent, because ...
         add_submenu_page ( EASYMAP_PLUGINNAME_SLUG,
-                           esc_html__( EASYMAP_PLUGINNAME_HUMAN, 'easymap' ),
+                           esc_html__( 'EasyMap', 'easymap' ),
                            esc_html__( 'Settings', 'easymap' ),
                            'manage_options',
                            EASYMAP_PLUGINNAME_SLUG,
                            [ $this, 'easymap_admin_page'] );
         // Add actual sub-menu items
         add_submenu_page ( EASYMAP_PLUGINNAME_SLUG,
-                           esc_html__( EASYMAP_PLUGINNAME_HUMAN, 'easymap' ) . ' - '.esc_html__( 'Locations', 'easymap' ),
+                           esc_html__( 'EasyMap', 'easymap' ) . ' - '.esc_html__( 'Locations', 'easymap' ),
                            esc_html__( 'Locations', 'easymap' ),
                            'manage_options',
                            EASYMAP_LOCATION_LIST_PAGE_NAME,
                            [ $this, 'easymap_admin_locations'] );
         add_submenu_page ( EASYMAP_PLUGINNAME_SLUG,
-                           esc_html__( EASYMAP_PLUGINNAME_HUMAN, 'easymap' ) . ' - '.esc_html__( 'Export various data', 'easymap' ),
+                           esc_html__( 'EasyMap', 'easymap' ) . ' - '.esc_html__( 'Export various data', 'easymap' ),
                            esc_html__( 'Export', 'easymap' ),
                            'manage_options',
                            EASYMAP_PLUGINNAME_SLUG. '-export',
                            [ $this, 'easymap_admin_export'] );
         add_submenu_page ( EASYMAP_PLUGINNAME_SLUG,
-                           esc_html__( EASYMAP_PLUGINNAME_HUMAN, 'easymap' ) . ' - '.esc_html__( 'Import external data', 'easymap' ),
+                           esc_html__( 'EasyMap', 'easymap' ) . ' - '.esc_html__( 'Import external data', 'easymap' ),
                            esc_html__( 'Import', 'easymap' ),
                            'manage_options',
                            EASYMAP_PLUGINNAME_SLUG. '-import',
@@ -795,7 +794,7 @@ class EasyMap {
         }
         // Output configuration options$action
         $tab_header = '<div class="wrap">';
-            $tab_header .= '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( EASYMAP_PLUGINNAME_HUMAN ) . '</h1>';
+            $tab_header .= '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( 'EasyMap' ) . '</h1>';
             $tab_header .= '<p>' . esc_html__( 'These settings allow general configuration of EasyMap', 'easymap' ) . '</p>';
             $tab_header .= '<nav class="nav-tab-wrapper">';
             $tab_header .= '<a data-toggle="easymap-googlemaps" href="#googlemaps" class="easymap-tab nav-tab">' . esc_html__( 'Google Maps', 'easymap' ) . '</a>';
@@ -857,7 +856,7 @@ class EasyMap {
                      '<pre>   zoom=1-18</pre>';
             $html .= '</div>';// easymap-shortcode
             $html .= '<div id="easymap-about" class="easymap-tab-content easymap-is-hidden">'.
-                     '<p>'  . esc_html__( 'Thank you for installing', 'easymap' ) .' ' . EASYMAP_PLUGINNAME_HUMAN . '!' . ' '.
+                     '<p>'  . esc_html__( 'Thank you for installing', 'easymap' ) .' ' . 'EasyMap' . '!' . ' '.
                      esc_html__( 'This WordPress plugin provides geolocation services for WordPress and certain types of service providers', 'easymap' ) .
                      '</p>';
             $html .= '<div class="easymap-config-section">'.
@@ -875,6 +874,24 @@ class EasyMap {
                                            '<a class="easymap-ext-link" target="_blank" href="https://code.webbplatsen.net/documentation/easymap/">'.
                                            'code.webbplatsen.net/documentation/easymap/</a>' .
                       '</p>'.
+                      '<p style="margin-top:20px;">' .
+                          '<h3>' . esc_html__( 'Other plugins', 'easymap' ) . '</h3>' .
+                          '<p class="cb2fa-row">' .
+                              '<a href="https://wordpress.org/plugins/fail2wp" target="_blank" class="easymap-ext-link">Fail2WP</a>' .
+                              '<br/>' .
+                              esc_html__( 'Security plugin that provides integration with fail2ban and many other security features for WordPress', 'easymap' ) . '.' .
+                          '</p>' .
+                          '<p class="easymap-row">' .
+                              '<a href="https://wordpress.org/plugins/cloudbridge-mattermost" target="_blank" class="easymap-ext-link">Cloudbridge Mattermost</a>' .
+                              '<br/>' .
+                              esc_html__( 'Plugin that provides integration with Mattermost, including notifications and OAuth2 authentication', 'easymap' ) . '.' .
+                          '</p>' .
+                          '<p class="easymap-row">' .
+                              '<a href="https://wordpress.org/plugins/cloudbridge-2fa" target="_blank" class="easymap-ext-link">Cloudbridge 2FA</a>' .
+                              '<br/>' .
+                              esc_html__( 'Plugin that provides uncomplicated 2FA protection', 'easymap' ) . '.' .
+                          '</p>' .
+                      '</p>' .
                       '</div>';
             $html .= '</div>';// easymap-about
             ob_start();
@@ -1014,7 +1031,7 @@ class EasyMap {
                 $output[] = $one_line;
             }
         }
-        $input = @ json_encode( $output );
+        $input = @ wp_json_encode( $output );
         return( $input );
     }
     public function easymap_setting_sanitize_google_pos( $input ) {
@@ -1239,7 +1256,7 @@ class EasyMap {
         //
         $html = '';
         $tab_header = '<div class="wrap">';
-            $tab_header .= '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( EASYMAP_PLUGINNAME_HUMAN ) .
+            $tab_header .= '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( 'EasyMap' ) .
                            ': <small>' . esc_html__( 'Export', 'easymap' ) . '</small></h1>';
             $tab_header .= '<p>' . esc_html__( 'Export various data', 'easymap' ) . '</p>';
             $tab_header .= '<nav class="nav-tab-wrapper">';
@@ -1255,7 +1272,7 @@ class EasyMap {
             $html .= '<p>' . esc_html__( 'Copy and paste this Base64 data into another EasyMap installation', 'easymap' ) . '.</p>';
             if ( ! empty( $locations ) ) {
                 $html .= '<textarea rows="10" cols="60" class="easymap-textarea-importexport" readonly>';
-                $html .= @ base64_encode( json_encode( $locations ) );
+                $html .= @ base64_encode( wp_json_encode( $locations ) );
                 $html .= '</textarea>';
             } else {
                 // Nothing to export
@@ -1334,7 +1351,7 @@ class EasyMap {
                 // Add our "signature", just for basic import validation
                 $query[] = array( 'easymap' => $this->easymap_plugin_version );
                 $html .= '<textarea rows="10" cols="60" class="easymap-textarea-importexport" readonly>';
-                $html .= @ base64_encode( json_encode( $query ) );
+                $html .= @ base64_encode( wp_json_encode( $query ) );
                 $html .= '</textarea>';
             }
             //EASYMAP_DEFAULT_PREFIX
@@ -1674,13 +1691,13 @@ class EasyMap {
                     $form_error_message = '<div class="notice notice-info is-dismissible"><p><strong>'.
                                           (int)$import_count . ' ' . esc_html__( 'location(s) imported', 'easymap' ) .
                                           '</strong></p></div>';
-                    update_option( 'easymap-location-list', json_encode( $this->easymap_location_list ) );
+                    update_option( 'easymap-location-list', wp_json_encode( $this->easymap_location_list ) );
                     break;
                 case 'easymap-locations-import-csv':
                     $form_error_message = '<div class="notice notice-info is-dismissible"><p><strong>'.
                                           (int)$import_count . ' ' . esc_html__( 'location(s) imported', 'easymap' ) .
                                           '</strong></p></div>';
-                    update_option( 'easymap-location-list', json_encode( $this->easymap_location_list ) );
+                    update_option( 'easymap-location-list', wp_json_encode( $this->easymap_location_list ) );
                     break;
                 case 'easymap-import-config':
                     $form_error_message = '<div class="notice notice-info is-dismissible"><p><strong>'.
@@ -1697,7 +1714,7 @@ class EasyMap {
         }
         //
         echo '<div class="wrap">' . wp_kses_post( $form_error_message );
-        echo '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( EASYMAP_PLUGINNAME_HUMAN ) .
+        echo '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( 'EasyMap' ) .
              ': <small>' . esc_html__( 'Import', 'easymap' ) . '</small></h1>';
         echo '<p>' . esc_html__( 'Import data', 'easymap' ) . '</p>';
         echo '<nav class="nav-tab-wrapper">';
@@ -1706,7 +1723,7 @@ class EasyMap {
         echo '<a data-toggle="easymap-import-config" href="#easymap-import-config" class="easymap-tab nav-tab">' . esc_html__( 'Configuration', 'easymap' ) . ', JSON</a>';
         echo '</nav>';
 
-        echo '<form method="post" action="' . admin_url( 'admin.php' ) . '?page=' . EASYMAP_PLUGINNAME_SLUG . '-import" id="easymap-tab-form">';
+        echo '<form method="post" action="' . admin_url( 'admin.php' ) . '?page=easymap-import" id="easymap-tab-form">';
         echo '<input type="hidden" name="easymap-form-tab" id="easymap-form-tab" value="' . esc_attr( $url_addon ) . '" />';
         echo '<div class="tab-content">';
         echo '<div class="easymap-config-header">';
@@ -1806,23 +1823,23 @@ class EasyMap {
                         $save_location = false;
                         if ( ! empty( $_POST['submit_location'] ) ) {
                             if ( ! empty( $_POST['easymap_nonce'] ) ) {
-                                if ( wp_verify_nonce( $_POST['easymap_nonce'], 'easymap-location-edit') ) {
+                                if ( wp_verify_nonce( wp_unslash( $_POST['easymap_nonce'] ), 'easymap-location-edit') ) {
                                     $form_validation = true;
-                                    $post_alias = ( empty( $_POST['alias'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['alias'] ) ), 0, 64 ) );
-                                    $post_name = ( empty( $_POST['name'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['name'] ) ), 0, 100 ) ) );
-                                    $post_color = ( empty( $_POST['color'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['color'] ) ), 0, 7 ) );
+                                    $post_alias = ( empty( $_POST['alias'] ) ? '':$this->Utility->x_substr( trim( sanitize_text_field( $_POST['alias'] ) ), 0, 64 ) );
+                                    $post_name = ( empty( $_POST['name'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( trim( sanitize_text_field( $_POST['name'] ) ), 0, 100 ) ) );
+                                    $post_color = ( empty( $_POST['color'] ) ? '':$this->Utility->x_substr( trim( sanitize_text_field( $_POST['color'] ) ), 0, 7 ) );
                                     //$post_description = ( empty( $_POST['description'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_textarea_field( trim( $_POST['description'] ) ), 0, 1024 ) ) );
-                                    $post_description = ( empty( $_POST['description'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( wp_kses_post( trim( $_POST['description'] ) ), 0, 1024 ) ) );
-                                    $post_address = ( empty( $_POST['address'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['address'] ) ), 0, 100 ) ) );
-                                    $post_number = ( empty( $_POST['number'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['number'] ) ), 0, 20 ) ) );
-                                    $post_city = ( empty( $_POST['city'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['city'] ) ), 0, 100 ) ) );
-                                    $post_state = ( empty( $_POST['state'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['state'] ) ), 0, 100 ) ) );
-                                    $post_zip = ( empty( $_POST['zip'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['zip'] ) ), 0, 100 ) ) );
-                                    $post_phone = ( empty( $_POST['phone'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( sanitize_text_field( trim( $_POST['phone'] ) ), 0, 100 ) ) );
-                                    $post_email = ( empty( $_POST['email'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['email'] ) ), 0, 100 ) );
-                                    $post_website = ( empty( $_POST['website'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['website'] ) ), 0, 100 ) );
-                                    $post_pos_lat = ( empty( $_POST['pos_lat'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['pos_lat'] ) ), 0, 32 ) );
-                                    $post_pos_long = ( empty( $_POST['pos_long'] ) ? '':$this->Utility->x_substr( sanitize_text_field( trim( $_POST['pos_long'] ) ), 0, 32 ) );
+                                    $post_description = ( empty( $_POST['description'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( trim( wp_kses_post( $_POST['description'] ) ), 0, 1024 ) ) );
+                                    $post_address = ( empty( $_POST['address'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( trim( sanitize_text_field( $_POST['address'] ) ), 0, 100 ) ) );
+                                    $post_number = ( empty( $_POST['number'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( trim( sanitize_text_field( $_POST['number'] ) ), 0, 20 ) ) );
+                                    $post_city = ( empty( $_POST['city'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( trim( sanitize_text_field( $_POST['city'] ) ), 0, 100 ) ) );
+                                    $post_state = ( empty( $_POST['state'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( trim( sanitize_text_field( $_POST['state'] ) ), 0, 100 ) ) );
+                                    $post_zip = ( empty( $_POST['zip'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( trim( sanitize_text_field( $_POST['zip'] ) ), 0, 100 ) ) );
+                                    $post_phone = ( empty( $_POST['phone'] ) ? '':$this->Utility->x_stripslashes( $this->Utility->x_substr( trim( sanitize_text_field( $_POST['phone'] ) ), 0, 100 ) ) );
+                                    $post_email = ( empty( $_POST['email'] ) ? '':$this->Utility->x_substr( trim( sanitize_text_field( $_POST['email'] ) ), 0, 100 ) );
+                                    $post_website = ( empty( $_POST['website'] ) ? '':$this->Utility->x_substr( trim( sanitize_text_field( $_POST['website'] ) ), 0, 100 ) );
+                                    $post_pos_lat = ( empty( $_POST['pos_lat'] ) ? '':$this->Utility->x_substr( trim( sanitize_text_field( $_POST['pos_lat'] ) ), 0, 32 ) );
+                                    $post_pos_long = ( empty( $_POST['pos_long'] ) ? '':$this->Utility->x_substr( trim( sanitize_text_field( $_POST['pos_long'] ) ), 0, 32 ) );
                                     if ( $this->Utility->x_strlen( $post_name ) < 2 ) {
                                         $form_validation = false;
                                         echo '<div class="notice notice-error is-dismissible"><p>'.
@@ -1892,7 +1909,7 @@ class EasyMap {
                                         }
                                         $this->easymap_location_list[ $pr['id'] ] = $pr;
                                         unset( $this->easymap_location_list[ 'new' ] );
-                                        update_option( 'easymap-location-list', json_encode( $this->easymap_location_list ) );
+                                        update_option( 'easymap-location-list', wp_json_encode( $this->easymap_location_list ) );
                                         $show_locations = true;
                                         echo '<div class="notice notice-success is-dismissible"><p>'.
                                              esc_html__( 'Location saved', 'easymap' ) .
@@ -1924,7 +1941,7 @@ class EasyMap {
             // Get ourselves a proper URL
             $action = admin_url( 'admin.php' ) . '?page=' . EASYMAP_LOCATION_LIST_PAGE_NAME;
             echo '<div class="wrap">';
-            echo '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( EASYMAP_PLUGINNAME_HUMAN ) .
+            echo '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( 'EasyMap' ) .
                  ': <small>' . esc_html__( 'Locations', 'easymap' ) . '</small></h1>';
             // Possibly handle delete before display of list
             if ( ! empty( $_REQUEST['delete_location'] ) ) {
@@ -1959,7 +1976,7 @@ class EasyMap {
                     $pr = $this->easymap_init_location( false );
                     $pr['id'] = (int)$delete_location;
                     $this->easymap_location_list[ $pr['id'] ] = $pr;
-                    update_option( 'easymap-location-list', json_encode( $this->easymap_location_list ) );
+                    update_option( 'easymap-location-list', wp_json_encode( $this->easymap_location_list ) );
                     echo '<div class="notice notice-success is-dismissible"><p>'.
                          esc_html__( 'Location deleted', 'easymap' ) .
                          '</p>'.
@@ -2009,7 +2026,7 @@ class EasyMap {
         $cancel_url = admin_url( 'admin.php' ) . '?page=' . EASYMAP_LOCATION_LIST_PAGE_NAME;
         $action = $cancel_url . '&action=edit';
         echo '<div class="wrap">';
-        echo '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( EASYMAP_PLUGINNAME_HUMAN ) .
+        echo '<h1>' . $this->easymap_make_icon_html( 'appicon' ) . '&nbsp;&nbsp;' . esc_html( 'EasyMap' ) .
              ': <small>' . esc_html__( 'Location', 'easymap' ) . '</small></h1>';
         if ( empty( $_POST['submit_location'] ) || empty( $_POST['location'] ) ) {
             if ( $location_id == 'new' ) {
@@ -2039,21 +2056,21 @@ class EasyMap {
             // error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): Retaining fields' );
             $pr = $this->easymap_init_location( false );
             $pr['id'] = $_POST['location'];
-            $pr['al'] = $this->Utility->x_strtolower( $Utility->x_substr( sanitize_text_field( trim( $_POST['alias'] ) ), 0, 64 ) );
-            $pr['na'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['name'] ) ), 0, 100 );
+            $pr['al'] = $this->Utility->x_strtolower( $Utility->x_substr( trim( sanitize_text_field( $_POST['alias'] ) ), 0, 64 ) );
+            $pr['na'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['name'] ) ), 0, 100 );
             //$pr['co'] = sanitize_hex_color( $this->Utility->x_substr( trim( $_POST['color'] ), 0, 7 ) );
-            $pr['sa'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['address'] ) ), 0, 100 );
-            $pr['sn'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['number'] ) ), 0, 20 );
-            $pr['ci'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['city'] ) ), 0, 100 );
-            $pr['st'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['state'] ) ), 0, 100 );
-            $pr['pc'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['zip'] ) ), 0, 100 );
-            $pr['ph'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['phone'] ) ), 0, 100 );
-            $pr['em'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['email'] ) ), 0, 100 );
-            $pr['ws'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['website'] ) ), 0, 100 );
-            $pr['la'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['pos_lat'] ) ), 0, 32 );
-            $pr['lo'] = $this->Utility->x_substr( sanitize_text_field( trim( $_POST['pos_long'] ) ), 0, 32 );
+            $pr['sa'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['address'] ) ), 0, 100 );
+            $pr['sn'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['number'] ) ), 0, 20 );
+            $pr['ci'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['city'] ) ), 0, 100 );
+            $pr['st'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['state'] ) ), 0, 100 );
+            $pr['pc'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['zip'] ) ), 0, 100 );
+            $pr['ph'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['phone'] ) ), 0, 100 );
+            $pr['em'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['email'] ) ), 0, 100 );
+            $pr['ws'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['website'] ) ), 0, 100 );
+            $pr['la'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['pos_lat'] ) ), 0, 32 );
+            $pr['lo'] = $this->Utility->x_substr( trim( sanitize_text_field( $_POST['pos_long'] ) ), 0, 32 );
             //$pr['no'] = $this->Utility->x_substr( sanitize_textarea_field( wp_kses_post( trim( $_POST['description'] ) ) ), 0, 1024 );
-            $pr['no'] = $this->Utility->x_substr( wp_kses_post( trim( $_POST['description'] ) ) , 0, 1024 );
+            $pr['no'] = $this->Utility->x_substr( trim( wp_kses_post( $_POST['description'] ) ) , 0, 1024 );
             if ( ! empty( $_POST['active'] ) ) {
                 $pr['ac']   = true;
             } else {
@@ -2070,17 +2087,17 @@ class EasyMap {
         echo wp_nonce_field( 'easymap-location-edit', 'easymap_nonce', true, false );
         // Table navigation retention
         if ( ! empty( $_REQUEST['orderby'] ) ) {
-            $field_val = sanitize_key( trim( $_REQUEST['orderby'] ) );
+            $field_val = trim( sanitize_key( $_REQUEST['orderby'] ) );
             $cancel_url = add_query_arg( 'orderby', rawurlencode( $field_val ), $cancel_url );
             echo '<input type="hidden" name="orderby" value="' . esc_attr( $field_val ). '" />';
         }
         if ( ! empty( $_REQUEST['order'] ) ) {
-            $field_val = sanitize_key( trim( $_REQUEST['order'] ) );
+            $field_val = trim( sanitize_key( $_REQUEST['order'] ) );
             $cancel_url = add_query_arg( 'order', rawurlencode( $field_val ), $cancel_url );
             echo '<input type="hidden" name="order" value="' . esc_attr( $field_val ). '" />';
         }
         if ( ! empty( $_REQUEST['s'] ) ) {
-            $field_val = sanitize_text_field( trim( $_REQUEST['s'] ) );
+            $field_val = trim( sanitize_text_field( $_REQUEST['s'] ) );
             $cancel_url = add_query_arg( 's', $field_val, $cancel_url );
             //$cancel_url = add_query_arg( 's', rawurlencode( $field_val ), $cancel_url );
             if ( ! empty( $_REQUEST['snonce'] ) ) {
@@ -2091,7 +2108,7 @@ class EasyMap {
             echo '<input type="hidden" name="s" value="' . esc_attr( $field_val ). '" />';
         }
         if ( ! empty( $_REQUEST['paged'] ) ) {
-            $field_val = sanitize_key( trim( $_REQUEST['paged'] ) );
+            $field_val = trim( sanitize_key( $_REQUEST['paged'] ) );
             $cancel_url = add_query_arg( 'paged', (int)$field_val, $cancel_url );
             echo '<input type="hidden" name="paged" value="' . esc_attr( $field_val ). '" />';
         }
@@ -2331,7 +2348,7 @@ class EasyMap {
                              esc_html__( 'Geolocation', 'easymap' ) .
                              '</strong><br/>';
                         if ( ! empty( $json['geometry']['location'] ) ) {
-                            echo esc_html__( 'Lat') . ': ' . esc_html( $json['geometry']['location']['lat'] ) . '&nbsp;&nbsp;&nbsp;' .
+                            echo esc_html__( 'Lat', 'easymap' ) . ': ' . esc_html( $json['geometry']['location']['lat'] ) . '&nbsp;&nbsp;&nbsp;' .
                                  esc_html__( 'Long', 'easymap' ) . ': ' . esc_html( $json['geometry']['location']['lng'] );
                             if ( (string)$json['geometry']['location']['lat'] == (string)$pr['la'] && (string)$json['geometry']['location']['lng'] == (string)$pr['lo'] ) {
                                 // Show green checkmark to indicate it matches stored information
@@ -2633,7 +2650,7 @@ class EasyMap {
                     const easymap_marker_std = {url:"https://maps.google.com/mapfiles/ms/icons/red-dot.png",};
                     const easymap_marker_yellow = {url:"https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",};
                     var easymap_mapOptions;
-                    let easymap_markers = ' . @ json_encode( $markers /*, JSON_NUMERIC_CHECK */ ) . ';
+                    let easymap_markers = ' . @ wp_json_encode( $markers /*, JSON_NUMERIC_CHECK */ ) . ';
                     let easymap_map;
                     let easymap_mapInfo;
                     var easymap_bounds = null;
@@ -2845,7 +2862,7 @@ class EasyMap {
      * @since 1.0.0
      */
     public function setup_locale() {
-		if ( ! load_plugin_textdomain( EASYMAP_PLUGINNAME_SLUG,
+        if ( ! load_plugin_textdomain( 'easymap',
                                        false,
                                        dirname( plugin_basename( __FILE__ ) ) . '/languages' ) ) {
             /**

@@ -1,4 +1,4 @@
-[![Software License](https://img.shields.io/badge/License-GPL%20v2-green.svg?style=flat-square)](LICENSE) [![PHP 7.2\+](https://img.shields.io/badge/PHP-7.2-blue?style=flat-square)](https://php.net) [![PHP 7.4\+](https://img.shields.io/badge/PHP-7.4-blue?style=flat-square)](https://php.net) [![WordPress 5](https://img.shields.io/badge/WordPress-5.8-orange?style=flat-square)](https://wordpress.org)
+[![Software License](https://img.shields.io/badge/License-GPL%20v2-green.svg?style=flat-square)](LICENSE) [![PHP 7.2\+](https://img.shields.io/badge/PHP-7.2-blue?style=flat-square)](https://php.net) [![PHP 7.4\+](https://img.shields.io/badge/PHP-7.4-blue?style=flat-square)](https://php.net) [![WordPress 5](https://img.shields.io/badge/WordPress-5.8-orange?style=flat-square)](https://wordpress.org)  [![WordPress 6](https://img.shields.io/badge/WordPress-6.7-orange?style=flat-square)](https://wordpress.org)
 
 # EasyMap
 
@@ -28,7 +28,7 @@ The plugin is also available on [wordpress.org](https://wordpress.org/plugins/ea
 ### Other notes:
 
 * This plugin `may` work with earlier versions of WordPress
-* This plugin has been tested with `WordPress 5.4, 5.5, 5.6, 5.7, and 5.8` at the time of this writing
+* This plugin has been tested with `WordPress 5.5+` at the time of this writing
 * This plugin optionally makes use of `mb_` PHP functions
 * This plugin may create entries in your PHP error log (if active)
 * This plugin contains no tracking code and does not store any information about users
@@ -54,6 +54,11 @@ This is a hard question to answer. There are no known incompatibilities.
 
 ## Changelog
 
+### 1.1.1
+* Validated with WordPress 6.7
+* Verified with Plugin Check (PCP)
+* Corrected some checks for **uninstall.php** and made it more WP-CLI compatible
+
 ### 1.1.0
 * Location status (active/inactive) is now displayed in admin, and sortable
 * Locations with incomplete geolocation data are no longer displayed
@@ -70,6 +75,9 @@ This is a hard question to answer. There are no known incompatibilities.
 
 ## Upgrade Notice
 
+### 1.1.1
+* Simply update the plugin from the WordPress plugins
+
 ### 1.1.0
 * Simply update the plugin from the WordPress plugins
 
@@ -83,13 +91,13 @@ This is a hard question to answer. There are no known incompatibilities.
 
 Please see [LICENSE](LICENSE) for a full copy of GPLv2
 
-Copyright (C) 2021 [Joaquim Homrighausen](https://github.com/joho1968); all rights reserved.
+Copyright 2021-2025 [Joaquim Homrighausen](https://github.com/joho1968); all rights reserved.
 
 The EasyMap Plugin was written by Joaquim Homrighausen while converting :coffee: into code.
 
-EasyMap is sponsored by [WebbPlatsen i Sverige AB](https://webbplatsen.se), Stockholm, Sweden.
+EasyMap is sponsored by [WebbPlatsen i Sverige AB](https://webbplatsen.se), Sweden.
 
-Commercial support and customizations for this plugin is available from WebbPlatsen i Sverige AB in Stockholm, :sweden:
+Commercial support and customizations for this plugin is available from WebbPlatsen i Sverige AB in :sweden:
 
 If you find this plugin useful, the author is happy to receive a donation, good review, or just a kind word.
 

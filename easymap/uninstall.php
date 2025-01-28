@@ -8,7 +8,7 @@
  * @author            Joaquim Homrighausen <joho@webbplatsen.se>
  *
  * uninstall.php
- * Copyright (C) 2021 Joaquim Homrighausen; all rights reserved.
+ * Copyright 2021-2025 Joaquim Homrighausen; all rights reserved.
  * Development sponsored by WebbPlatsen i Sverige AB, www.webbplatsen.se
  *
  * This file is part of EasyMap. EasyMap is free software.
@@ -31,15 +31,20 @@
 
 //  define( 'EASYMAP_UNINSTALL_TRACE', true );
 
-// Don't load directly
 defined( 'ABSPATH' ) || die( '-1' );
 // If uninstall not called from WordPress, then exit
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     if ( defined( 'EASYMAP_UNINSTALL_TRACE' ) ) {
-        error_log( 'easymap-uninstall: init' );
+        error_log( 'easymap-uninstall: init, WP_UNINSTALL_PLUGIN not defined' );
     }
     exit;
 }
+
+/**
+ * We don't check these anymore.
+ * https://developer.wordpress.org/plugins/plugin-basics/uninstall-methods/
+ */
+/*
 // If action is not to uninstall, then exit
 if ( empty( $_REQUEST['action'] ) || $_REQUEST['action'] !== 'delete-plugin' ) {
     if ( defined( 'EASYMAP_UNINSTALL_TRACE' ) ) {
@@ -61,6 +66,7 @@ if ( ! current_user_can( 'manage_options' ) || ! current_user_can( 'delete_plugi
     }
     exit;
 }
+*/
 
 // Figure out if an uninstall should remove plugin settings
 $remove_settings = get_option( 'easymap-settings-remove', '0' );

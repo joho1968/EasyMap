@@ -8,7 +8,7 @@
  * @author     Joaquim Homrighausen <joho@webbplatsen.se>
  *
  * class_location_admin.inc.php
- * Copyright (C) 2021 Joaquim Homrighausen where applicable
+ * Copyright 2021-2025 Joaquim Homrighausen where applicable
  * Development sponsored by WebbPlatsen i Sverige AB, www.webbplatsen.se
  *
  * This file is part of EasyMap. EasyMap is free software.
@@ -244,7 +244,7 @@ class EasyMap_Location_List extends \WP_List_Table {
     public function extra_tablenav( $which ) {
         if ( $which == 'top' ) {
             $addon_str = $this->retain_search_pagination();
-            echo '<a href="?page=' . EASYMAP_LOCATION_LIST_PAGE_NAME .
+            echo '<a href="?page=' . esc_html( EASYMAP_LOCATION_LIST_PAGE_NAME ) .
                  '&action=edit' .
                  '&location=new' .
                  '&_wpnonce=' . esc_attr( $this->single_item_edit_nonce ) .

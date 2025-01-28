@@ -183,3 +183,6 @@ label.easymap-form-label:after {
     width:100%;
     background-color: #eeeeee;
 }
+.easymap-row {
+    margin-top: 5px;
+}

@@ -8,7 +8,7 @@
  * @author     Joaquim Homrighausen <joho@webbplatsen.se>
  *
  * class_easymap_util.inc.php
- * Copyright (C) 2021 Joaquim Homrighausen where applicable
+ * Copyright 2021-2025 Joaquim Homrighausen where applicable
  * Development sponsored by WebbPlatsen i Sverige AB, www.webbplatsen.se
  *
  * This file is part of EasyMap. EasyMap is free software.
