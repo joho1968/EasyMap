@@ -83,7 +83,7 @@ class EasyMap_Location_List extends \WP_List_Table {
         if ( function_exists( 'collator_create' ) ) {
             $this->collator = collator_create( $this->locale );
             if ( ! is_object( $this->collator ) ) {
-                error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): Unable to create collator ("' . intl_error_message() . '")');
+                error_log( basename(__FILE__) . ' (' . __FUNCTION__ . '): Unable to create collator ("' . intl_get_error_message() . '")');
                 $this->collator = false;
             }
         } else {
@@ -168,7 +168,7 @@ class EasyMap_Location_List extends \WP_List_Table {
      * @since 1.0.0
      * @return array $columns, array of columns in table
      */
-    public function get_columns() {
+    public function get_columns() : array {
         $table_columns = array(
             //'cb'           =>   '<input type="checkbox" />',
             'id'   => __( 'ID', 'easymap' ),
@@ -185,7 +185,7 @@ class EasyMap_Location_List extends \WP_List_Table {
      * @since 1.0.0
      * @return array $sortable, the columns that can be sorted by.
      */
-    protected function get_sortable_columns() {
+    protected function get_sortable_columns() : array {
         $sortable = array(
                 'id' => array( 'id', true  ),
                 'al' => array( 'al', true  ),
@@ -215,7 +215,7 @@ class EasyMap_Location_List extends \WP_List_Table {
      *
      * @since 1.0.0
      */
-    protected function retain_search_pagination() {
+    protected function retain_search_pagination() : string {
         $addon_str = '';
         if ( ! empty( $_REQUEST['orderby'] ) ) {
             $addon_str .= '&orderby=' . sanitize_key( trim( $_REQUEST['orderby'] ) );
@@ -323,7 +323,7 @@ class EasyMap_Location_List extends \WP_List_Table {
      *
      * @since 1.0.0
      */
-    public function get_bulk_actions() {
+    public function get_bulk_actions() : array {
         $actions = array();
         // $actions['delete'] = __( 'Delete', 'easymap' );
         return( $actions );
@@ -404,9 +404,9 @@ class EasyMap_Location_List extends \WP_List_Table {
      *
      * @since 1.0.0
      */
-    protected function get_locations( string $search_string ) {
+    protected function get_locations( string $search_string ) : array {
+        $db_results = array();
         if ( ! empty( $search_string ) ) {
-            $db_results = array();
             $is_numeric = is_numeric( $search_string );
             foreach( $this->easymap_location_list as $k => $v ) {
                 if ( empty( $v['na'] ) ) {
@@ -428,7 +428,6 @@ class EasyMap_Location_List extends \WP_List_Table {
                 }
             }
         } else {
-            $db_results = array();
             foreach( $this->easymap_location_list as $k => $v ) {
                 if ( empty( $v['na'] ) ) {
                     continue;
@@ -450,6 +449,7 @@ class EasyMap_Location_List extends \WP_List_Table {
     public function handle_sorting( $a, $b ) {
         $order_by = ( isset( $_REQUEST['orderby'] ) ) ? sanitize_key( $_REQUEST['orderby'] ) : 'id';
         $order_how = ( ! empty( $_REQUEST['order'] ) ) ? sanitize_key( $_REQUEST['order'] ) : 'asc';
+        $result = 0;
 
         switch( $order_by ) {
             case 'na':// Name

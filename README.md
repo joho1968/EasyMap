@@ -1,4 +1,4 @@
-[![Software License](https://img.shields.io/badge/License-GPL%20v2-green.svg?style=flat-square)](LICENSE) [![PHP 7.2\+](https://img.shields.io/badge/PHP-7.2-blue?style=flat-square)](https://php.net) [![PHP 7.4\+](https://img.shields.io/badge/PHP-7.4-blue?style=flat-square)](https://php.net) [![WordPress 5](https://img.shields.io/badge/WordPress-5.8-orange?style=flat-square)](https://wordpress.org)  [![WordPress 6](https://img.shields.io/badge/WordPress-6.7-orange?style=flat-square)](https://wordpress.org)
+[![Software License](https://img.shields.io/badge/License-GPL%20v2-green.svg?style=flat-square)](LICENSE) [![PHP 7.2\+](https://img.shields.io/badge/PHP-7.2-blue?style=flat-square)](https://php.net) [![PHP 7.4\+](https://img.shields.io/badge/PHP-7.4-blue?style=flat-square)](https://php.net) [![WordPress 5](https://img.shields.io/badge/WordPress-5.8-orange?style=flat-square)](https://wordpress.org)  [![WordPress 6](https://img.shields.io/badge/WordPress-6.8-orange?style=flat-square)](https://wordpress.org)
 
 # EasyMap
 
@@ -53,6 +53,10 @@ EasyMap uses standard WordPress functionality to handle localization/locale. The
 This is a hard question to answer. There are no known incompatibilities.
 
 ## Changelog
+
+### 1.1.2
+* Validated with WordPress 6.8
+* Corrected call to unknown intl() function
 
 ### 1.1.1
 * Validated with WordPress 6.7

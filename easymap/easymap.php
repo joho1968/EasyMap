@@ -11,7 +11,7 @@
  * Plugin Name:       EasyMap
  * Plugin URI:        https://code.webbplatsen.net/wordpress/easymap/
  * Description:       Uncomplicated map functionality for WordPress
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            WebbPlatsen, Joaquim Homrighausen <joho@webbplatsen.se>
  * Author URI:        https://webbplatsen.se/
  * License:           GPL-2.0+
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'EASYMAP_WORDPRESS_PLUGIN',        true                    );
-define( 'EASYMAP_VERSION',                 '1.1.1'                 );
+define( 'EASYMAP_VERSION',                 '1.1.2'                 );
 define( 'EASYMAP_REV',                     1                       );
 define( 'EASYMAP_PLUGINNAME_SLUG',         'easymap'               );
 define( 'EASYMAP_DEFAULT_PREFIX',          'easymap'               );
