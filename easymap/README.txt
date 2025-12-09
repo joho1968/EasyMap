@@ -1,22 +1,27 @@
-[![Software License](https://img.shields.io/badge/License-GPL%20v2-green.svg?style=flat-square)](LICENSE) [![PHP 7.4\+](https://img.shields.io/badge/PHP-7.4-blue?style=flat-square)](https://php.net) [![WordPress 5](https://img.shields.io/badge/WordPress-5.8-orange?style=flat-square)](https://wordpress.org)  [![WordPress 6](https://img.shields.io/badge/WordPress-6.9-orange?style=flat-square)](https://wordpress.org)
+=== EasyMap ===
+Contributors: joho68, webbplatsen
+Donate link: https://code.webbplatsen.net/wordpress/easymap/
+Tags: map, google, geolocation
+Requires at least: 5.4.0
+Tested up to: 6.9
+Requires PHP: 7.4
+Stable tag: 1.1.2
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-# EasyMap
+Maps plugin for WordPress with support for Google Maps. Tested with WordPress 5.5+ and PHP 7.4+
+
+== Description ==
 
 Uncomplicated map functionality for WordPress.
-
-## Description
 
 The EasyMap for WordPress plugin will let you put Google Maps on your WordPress website with very little effort. The bottom line idea is "simple". You can have one (1) map per content page, you can have up to 200 pins/markers on a given map. You may specify which pins/markers should appear on a given map. You cannot customize pin colors. You can, however, customize just about every display aspect of the output using CSS.
 
 The EasyMap plugin requires a Google API key suitable for Google Maps and Google Geocoding. This is a requirement imposed by Google.
 
-In its first release, the EasyMap plugin supports only Google Maps.
+The EasyMap plugin currently supports only Google Maps.
 
-The WordPress slug is `easymap`.
-
-The plugin is also available on [wordpress.org](https://wordpress.org/plugins/easymap/)
-
-### Basic functionality includes:
+= Basic functionality =
 
 * Up to 200 locations can be displayed
 * Choose to display all or some of the configured locations
@@ -25,15 +30,15 @@ The plugin is also available on [wordpress.org](https://wordpress.org/plugins/ea
 * Export and Import locations and plugin configuration
 * Support for multiple location address formats
 
-### Other notes:
+= Other notes =
 
-* This plugin `may` work with earlier versions of WordPress
-* This plugin has been tested with `WordPress 5.5+` at the time of this writing
+* This plugin **may** work with earlier versions of WordPress
+* This plugin has been tested with **WordPress 5.5** and above at the time of this writing
 * This plugin optionally makes use of `mb_` PHP functions
 * This plugin may create entries in your PHP error log (if active)
 * This plugin contains no tracking code and does not store any information about users
 
-## Installation
+== Installation ==
 
 This section describes how to install the plugin and get it working.
 
@@ -42,66 +47,62 @@ This section describes how to install the plugin and get it working.
 3. Configure the basic settings
 4. To enable Google Maps integration, you will need a Google Maps API key with geolocation activated
 
-## Frequently Asked Questions
+== Frequently Asked Questions ==
 
-### Is the plugin locale aware
+= Is the plugin locale aware =
 
 EasyMap uses standard WordPress functionality to handle localization/locale. The native language localization of the plugin is English. It has been translated to Swedish by the author.
 
-### Are there any incompatibilities
+= Are there any incompatibilities =
 
 This is a hard question to answer. There are no known incompatibilities.
 
-## Changelog
+== Changelog ==
 
-### 1.1.2
+= 1.1.2 =
 * Validated with WordPress 6.8 and WordPress 6.9
 * Corrected call to unknown intl() function
 
-### 1.1.1
+= 1.1.1 =
 * Validated with WordPress 6.7
 * Verified with Plugin Check (PCP)
 * Corrected some checks for **uninstall.php** and made it more WP-CLI compatible
 
-### 1.1.0
+= 1.1.0 =
 * Location status (active/inactive) is now displayed in admin, and sortable
 * Locations with incomplete geolocation data are no longer displayed
 * Added option to enable "greedy" map control to allow for single finger touch movement on map
 * Added option to enable/disable Google Maps Streetview button
 * Added option to enable/disable Google Maps Fullscreen button
 
-### 1.0.1
+= 1.0.1 =
 * Correction of activation issue
 * Better handling of HTML in templates and description fields
 
-### 1.0.0
+= 1.0.0 =
 * Initial release
 
-## Upgrade Notice
+== Upgrade Notice ==
 
-### 1.1.1
+= 1.1.1 =
 * Simply update the plugin from the WordPress plugins
 
-### 1.1.0
+= 1.1.0 =
 * Simply update the plugin from the WordPress plugins
 
-### 1.0.1
+= 1.0.1 =
 * Simply update the plugin from the WordPress plugins
 
-### 1.0.0
+= 1.0.0 =
 * Initial release
 
-## License
+== Credits ==
 
-Please see [LICENSE](LICENSE) for a full copy of GPLv2
+The EasyMap Plugin was written by Joaquim Homrighausen while converting caffeine into code.
 
-Copyright 2021-2025 [Joaquim Homrighausen](https://github.com/joho1968); all rights reserved.
+EasyMap is sponsored by [WebbPlatsen i Sverige AB](https://webbplatsen.se), Stockholm, Sweden.
 
-The EasyMap Plugin was written by Joaquim Homrighausen while converting :coffee: into code.
-
-EasyMap is sponsored by [WebbPlatsen i Sverige AB](https://webbplatsen.se), Sweden.
-
-Commercial support and customizations for this plugin is available from WebbPlatsen i Sverige AB in :sweden:
+Commercial support and customizations for this plugin is available from WebbPlatsen i Sverige AB in Stockholm, Sweden.
 
 If you find this plugin useful, the author is happy to receive a donation, good review, or just a kind word.
 
@@ -112,10 +113,3 @@ This plugin can also be downloaded from [code.webbplatsen.net](https://code.webb
 More detailed documentation is available at [code.webbplatsen.net/documentation/easymap/](https://code.webbplatsen.net/documentation/easymap/)
 
 Icon and banner images based on [freesvg.org/map-location-icon-vector-image](https://freesvg.org/map-location-icon-vector-image). Kudos!
-
-### External references
-
-These links are not here for any sort of endorsement or marketing, they're purely for informational purposes.
-
-* me; :monkey: https://joho.se and https://github.com/joho1968
-* WebbPlatsen; https://webbplatsen.se and https://code.webbplatsen.net
